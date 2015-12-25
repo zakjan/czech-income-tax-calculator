@@ -1,0 +1,33 @@
+{
+  "name": "webapp-scaffold",
+  "version": "0.0.0",
+  "description": "Webapp Scaffold",
+  "author": "Jan Žák <zj@zakjan.cz>",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack",
+    "release": "webpack -p"
+  },
+  "devDependencies": {
+    "babel": "^6.3.13",
+    "babel-core": "^6.3.17",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "css-loader": "^0.23.0",
+    "es6-promise": "^3.0.2",
+    "exports-loader": "^0.6.2",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^1.7.0",
+    "imports-loader": "^0.6.5",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.2",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "style-loader": "^0.13.0",
+    "underscore.string": "^3.2.2",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "whatwg-fetch": "^0.10.1"
+  }
+}
