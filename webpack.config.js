@@ -5,7 +5,7 @@ var Promise = require('es6-promise').Promise;
 var UnderscoreString = require('underscore.string');
 var Webpack = require('webpack');
 
-var APP_NAME = 'Webapp Scaffold';
+var APP_NAME = 'Kalkulačka příjmů';
 
 
 module.exports = {

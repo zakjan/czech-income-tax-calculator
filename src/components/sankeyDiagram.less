@@ -1,0 +1,26 @@
+.sankey-diagram {
+
+  .node {
+    rect {
+      stroke: #000;
+      stroke-alignment: inside;
+      fill-opacity: 0.9;
+      shape-rendering: crispEdges;
+    }
+
+    text {
+      text-shadow: 0 1px 1px #fff;
+    }
+  }
+
+  .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: 0.2;
+
+    &:hover {
+      stroke-opacity: 0.5;
+    }
+  }
+
+}

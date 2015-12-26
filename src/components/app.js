@@ -2,15 +2,17 @@
 
 import React from 'react';
 
-import IncomeDiagram from './incomeDiagram.js';
+import ContractorWithFlatExpenses from './contractorWithFlatExpenses.js';
+
+require('./app.less');
 
 
 var App = React.createClass({
   render() {
     return (
-      <div>
-        <h1>Kalkulačka čistého příjmu</h1>
-        <IncomeDiagram />
+      <div className="app">
+        <h1>Kalkulačka příjmů</h1>
+        <ContractorWithFlatExpenses />
       </div>
     );
   },
