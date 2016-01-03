@@ -1,7 +1,7 @@
 {
-  "name": "webapp-scaffold",
+  "name": "czech-income-calculator",
   "version": "0.0.0",
-  "description": "Webapp Scaffold",
+  "description": "Czech Income Calculator",
   "author": "Jan Žák <zj@zakjan.cz>",
   "scripts": {
     "dev": "webpack-dev-server",

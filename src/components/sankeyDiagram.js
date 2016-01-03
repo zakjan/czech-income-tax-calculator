@@ -11,8 +11,6 @@ import { sprintf } from 'underscore.string';
 require('./sankeyDiagram.less');
 
 
-var format = d3Format.localeCsCz.format('$,d');
-
 var SankeyDiagram = React.createClass({
   renderContent(el) {
     var nodes = this.props.nodes;
@@ -28,6 +26,7 @@ var SankeyDiagram = React.createClass({
     var width = diagramWidth + 2 * padding + linkWidth;
     var height = diagramHeight + 2 * padding;
 
+    var formatCurrency = d3Format.localeCsCz.format('$,d');
     var colorScale = d3Scale.category20();
 
     var svg = d3Selection.select(el).append('svg')
@@ -55,7 +54,7 @@ var SankeyDiagram = React.createClass({
       .style('stroke-width', (d) => d.dy);
 
     link.append('title')
-      .text((d) => sprintf('%s → %s\n%s', d.source.name, d.target.name, format(d.value)));
+      .text((d) => sprintf('%s → %s\n%s', d.source.name, d.target.name, formatCurrency(d.value)));
 
     var node = svg.append('g').selectAll('.node')
       .data(nodes)
@@ -68,13 +67,13 @@ var SankeyDiagram = React.createClass({
       .attr('height', (d) => d.dy)
       .style('fill', (d) => colorScale(d.name))
       .append('title')
-      .text((d) => sprintf('%s\n%s', d.name, format(d.value)));
+      .text((d) => sprintf('%s\n%s', d.name, formatCurrency(d.value)));
 
     node.append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
       .attr('dy', '.35em')
-      .text((d) => sprintf('%s: %s', d.name, format(d.value)));
+      .text((d) => sprintf('%s: %s', d.name, formatCurrency(d.value)));
   },
 
   render() {
