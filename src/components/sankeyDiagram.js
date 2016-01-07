@@ -11,52 +11,57 @@ import { sprintf } from 'underscore.string';
 require('./sankeyDiagram.less');
 
 
-var SankeyDiagram = React.createClass({
-  renderContent(el) {
-    var nodes = this.props.nodes;
-    var links = this.props.links;
+const SankeyDiagram = React.createClass({
+  renderDiagram() {
+    const el = this.refs.el;
+    while (el.firstChild) {
+      el.removeChild(el.firstChild);
+    }
 
-    var nodeWidth = 15;
-    var nodePadding = 10;
-    var linkWidth = 200;
-    var columns = 3;
-    var diagramWidth = (columns - 1) * linkWidth + columns * nodeWidth;
-    var diagramHeight = diagramWidth / 1.6;
-    var padding = 10;
-    var width = diagramWidth + 2 * padding + linkWidth;
-    var height = diagramHeight + 2 * padding;
+    const nodes = this.props.nodes;
+    const links = this.props.links;
 
-    var formatCurrency = d3Format.localeCsCz.format('$,d');
-    var colorScale = d3Scale.category20();
+    const nodeWidth = 15;
+    const nodePadding = 10;
+    const linkWidth = 200;
+    const columns = 4;
+    const diagramWidth = (columns - 1) * linkWidth + columns * nodeWidth;
+    const diagramHeight = diagramWidth / 1.6;
+    const padding = 10;
+    const width = diagramWidth + 2 * padding + linkWidth;
+    const height = diagramHeight + 2 * padding;
 
-    var svg = d3Selection.select(el).append('svg')
+    const formatCurrency = d3Format.localeCsCz.format('$,d');
+    const colorScale = d3Scale.category20();
+
+    const svg = d3Selection.select(el).append('svg')
       .attr('class', 'sankey-diagram')
       .attr('width', width)
       .attr('height', height)
       .append('g')
       .attr('transform', sprintf('translate(%d, %d)', padding, padding));
 
-    var sankey = d3Sankey.sankey()
+    const sankey = d3Sankey.sankey()
+      .size([diagramWidth, diagramHeight])
       .nodeWidth(nodeWidth)
       .nodePadding(nodePadding)
-      .size([diagramWidth, diagramHeight]);
-
-    sankey
       .nodes(nodes)
       .links(links)
-      .layout(32);
+      .layout(1024);
 
-    var link = svg.append('g').selectAll('.link')
+    const path = sankey.link();
+
+    const link = svg.append('g').selectAll('.link')
       .data(links)
       .enter().append('path')
       .attr('class', 'link')
-      .attr('d', sankey.link())
+      .attr('d', path)
       .style('stroke-width', (d) => d.dy);
 
     link.append('title')
       .text((d) => sprintf('%s → %s\n%s', d.source.name, d.target.name, formatCurrency(d.value)));
 
-    var node = svg.append('g').selectAll('.node')
+    const node = svg.append('g').selectAll('.node')
       .data(nodes)
       .enter().append('g')
       .attr('class', 'node')
@@ -72,13 +77,20 @@ var SankeyDiagram = React.createClass({
     node.append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
-      .attr('dy', '.35em')
       .text((d) => sprintf('%s: %s', d.name, formatCurrency(d.value)));
+  },
+
+  componentDidMount() {
+    this.renderDiagram();
+  },
+
+  componentDidUpdate(prevProps, prevState) {
+    this.renderDiagram();
   },
 
   render() {
     return (
-      <div ref={this.renderContent} />
+      <div ref="el" />
     );
   },
 });
