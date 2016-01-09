@@ -17,9 +17,9 @@ export const setExpense = (value) => {
   };
 };
 
-export const setFlatExpenseRatio = (value) => {
+export const setFlatExpenseRate = (value) => {
   return {
-    type: actionTypes.SET_FLAT_EXPENSE_RATIO,
+    type: actionTypes.SET_FLAT_EXPENSE_RATE,
     value: value,
   };
 };

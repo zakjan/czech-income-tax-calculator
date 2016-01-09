@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import App from 'components/app.js';
+import App from './app.js';
 import * as actionCreators from 'services/actionCreators.js';
 
 

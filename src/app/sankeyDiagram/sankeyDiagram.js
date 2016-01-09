@@ -12,11 +12,16 @@ import './sankeyDiagram.less';
 
 
 const SankeyDiagram = React.createClass({
-  renderDiagram() {
+  clearDiagram() {
     const el = this.refs.el;
+
     while (el.firstChild) {
       el.removeChild(el.firstChild);
     }
+  },
+
+  renderDiagram() {
+    this.clearDiagram();
 
     const nodes = this.props.nodes;
     const links = this.props.links;
@@ -26,7 +31,7 @@ const SankeyDiagram = React.createClass({
     const linkWidth = 200;
     const columns = 4;
     const diagramWidth = (columns - 1) * linkWidth + columns * nodeWidth;
-    const diagramHeight = diagramWidth / 1.6;
+    const diagramHeight = diagramWidth / 4;
     const padding = 10;
     const width = diagramWidth + 2 * padding + linkWidth;
     const height = diagramHeight + 2 * padding;
@@ -34,7 +39,7 @@ const SankeyDiagram = React.createClass({
     const formatCurrency = d3Format.localeCsCz.format('$,d');
     const colorScale = d3Scale.category20();
 
-    const svg = d3Selection.select(el).append('svg')
+    const svg = d3Selection.select(this.refs.el).append('svg')
       .attr('class', 'sankey-diagram')
       .attr('width', width)
       .attr('height', height)
@@ -47,7 +52,7 @@ const SankeyDiagram = React.createClass({
       .nodePadding(nodePadding)
       .nodes(nodes)
       .links(links)
-      .layout(1024);
+      .layout(32);
 
     const path = sankey.link();
 
@@ -58,7 +63,8 @@ const SankeyDiagram = React.createClass({
       .attr('d', path)
       .style('stroke-width', (d) => d.dy);
 
-    link.append('title')
+    link
+      .append('title')
       .text((d) => sprintf('%s → %s\n%s', d.source.name, d.target.name, formatCurrency(d.value)));
 
     const node = svg.append('g').selectAll('.node')
@@ -67,17 +73,23 @@ const SankeyDiagram = React.createClass({
       .attr('class', 'node')
       .attr('transform', (d) => sprintf('translate(%.0f, %.0f)', d.x, d.y));
 
-    node.append('rect')
+    node
+      .append('rect')
       .attr('width', sankey.nodeWidth())
       .attr('height', (d) => d.dy)
       .style('fill', (d) => colorScale(d.name))
       .append('title')
       .text((d) => sprintf('%s\n%s', d.name, formatCurrency(d.value)));
 
-    node.append('text')
+    node
+      .filter((d) => d.value > 0)
+      .append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
       .text((d) => sprintf('%s: %s', d.name, formatCurrency(d.value)));
+
+    sankey.relayout();
+    link.attr("d", path);
   },
 
   componentDidMount() {

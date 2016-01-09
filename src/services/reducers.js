@@ -2,23 +2,23 @@
 
 import Immutable from 'immutable';
 
-import { SET_INCOME, SET_EXPENSE, SET_FLAT_EXPENSE_RATIO } from './actionTypes.js';
+import * as actionTypes from './actionTypes.js';
 
 
 const initialState = Immutable.Map({
-  income: 1620000,
+  income: 720000,
   expense: 100000,
-  flatExpenseRatio: 0.6,
+  flatExpenseRate: 0.6,
 });
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_INCOME:
+    case actionTypes.SET_INCOME:
       return state.set('income', action.value);
-    case SET_EXPENSE:
+    case actionTypes.SET_EXPENSE:
       return state.set('expense', action.value);
-    case SET_FLAT_EXPENSE_RATIO:
-      return state.set('flatExpenseRatio', action.value);
+    case actionTypes.SET_FLAT_EXPENSE_RATE:
+      return state.set('flatExpenseRate', action.value);
     default:
       return state;
   }

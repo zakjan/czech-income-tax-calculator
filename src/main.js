@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 
-import AppContainer from './containers/appContainer.js';
+import AppContainer from 'app/appContainer.js';
 import store from 'services/store.js';
 
 import './main.less';
