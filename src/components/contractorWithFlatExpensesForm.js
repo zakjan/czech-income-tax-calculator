@@ -12,7 +12,7 @@ const ContractorWithFlatExpensesForm = (props) => {
         <input
           type="number"
           value={props.income}
-          onChange={(e) => props.onChangeIncome(parseFloat(e.target.value))}
+          onChange={(e) => props.setIncome(parseFloat(e.target.value))}
         />
       </div>
       <div>
@@ -21,7 +21,7 @@ const ContractorWithFlatExpensesForm = (props) => {
         <input
           type="number"
           value={props.expense}
-          onChange={(e) => props.onChangeExpense(parseFloat(e.target.value))}
+          onChange={(e) => props.setExpense(parseFloat(e.target.value))}
         />
       </div>
       <div>
@@ -29,7 +29,7 @@ const ContractorWithFlatExpensesForm = (props) => {
         {' '}
         <select
           value={props.flatExpenseRatio}
-          onChange={(e) => props.onChangeFlatExpenseRatio(parseFloat(e.target.value))}
+          onChange={(e) => props.setFlatExpenseRatio(parseFloat(e.target.value))}
         >
           <option value="0.4">40%</option>
           <option value="0.6">60%</option>
@@ -38,6 +38,15 @@ const ContractorWithFlatExpensesForm = (props) => {
       </div>
     </div>
   );
+};
+
+ContractorWithFlatExpensesForm.propTypes = {
+  income: React.PropTypes.number.isRequired,
+  expense: React.PropTypes.number.isRequired,
+  flatExpenseRatio: React.PropTypes.number.isRequired,
+  setIncome: React.PropTypes.func.isRequired,
+  setExpense: React.PropTypes.func.isRequired,
+  setFlatExpenseRatio: React.PropTypes.func.isRequired,
 };
 
 

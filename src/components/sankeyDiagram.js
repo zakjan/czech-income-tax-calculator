@@ -8,7 +8,7 @@ import d3Format from 'd3-format';
 import React from 'react';
 import { sprintf } from 'underscore.string';
 
-require('./sankeyDiagram.less');
+import './sankeyDiagram.less';
 
 
 const SankeyDiagram = React.createClass({
@@ -94,6 +94,17 @@ const SankeyDiagram = React.createClass({
     );
   },
 });
+
+SankeyDiagram.propTypes = {
+  nodes: React.PropTypes.arrayOf(React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+  })).isRequired,
+  links: React.PropTypes.arrayOf(React.PropTypes.shape({
+    source: React.PropTypes.number.isRequired,
+    target: React.PropTypes.number.isRequired,
+    value: React.PropTypes.number.isRequired,
+  })).isRequired,
+};
 
 
 export default SankeyDiagram;

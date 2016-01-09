@@ -62,5 +62,11 @@ const ContractorWithFlatExpensesDiagram = (props) => {
   );
 };
 
+ContractorWithFlatExpensesDiagram.propTypes = {
+  income: React.PropTypes.number.isRequired,
+  expense: React.PropTypes.number.isRequired,
+  flatExpenseRatio: React.PropTypes.number.isRequired,
+};
+
 
 export default ContractorWithFlatExpensesDiagram;

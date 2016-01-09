@@ -4,11 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 
-import App from './components/app.js';
-import store from './services/store.js';
+import AppContainer from './containers/appContainer.js';
+import store from 'services/store.js';
 
-// common assets
-require('./main.less');
+import './main.less';
 
 
 // run!
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     (
       <Provider store={store}>
-        <App />
+        <AppContainer />
       </Provider>
     ),
     el
