@@ -1,0 +1,15 @@
+dependencies:
+  cache_directories:
+    - node_modules
+  override:
+    - ./circle.sh dependencies
+
+test:
+  override:
+    - ./circle.sh release
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - ./circle.sh deploy

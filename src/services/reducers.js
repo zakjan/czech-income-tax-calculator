@@ -9,7 +9,7 @@ const initialState = Immutable.Map({
   flatExpenseRate: 0.6,
 });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = '') => {
   switch (action.type) {
     case actionTypes.SET_INCOME:
       return state.set('income', action.value);

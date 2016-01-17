@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "release": "webpack -p"
+    "release": "webpack -p",
+    "start": "node web.js"
   },
   "devDependencies": {
     "babel": "^6.3.13",
@@ -39,5 +40,8 @@
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0",
     "whatwg-fetch": "^0.10.1"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
   }
 }
