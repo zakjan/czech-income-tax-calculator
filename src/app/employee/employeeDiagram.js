@@ -13,16 +13,16 @@ const EmployeeDiagram = (props) => {
   const employerHealthInsurance = taxCalculator.employerHealthInsuranceFromWage(wage);
 
   const incomeTax = taxCalculator.incomeTaxFromTaxableIncome(wage + employerSocialInsurance + employerHealthInsurance);
-  const taxedIncome = wage - employeeSocialInsurance - employeeHealthInsurance;
+  const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [
     { name: 'Superhrubá mzda' },
 
-    { name: 'Daň z příjmu' },
     { name: 'Sociální pojištění' },
     { name: 'Zdravotní pojištění' },
     { name: 'Hrubá mzda' },
 
+    { name: 'Daň z příjmu' },
     { name: 'Sociální pojištění' },
     { name: 'Zdravotní pojištění' },
     { name: 'Čistá mzda' },
@@ -30,18 +30,18 @@ const EmployeeDiagram = (props) => {
     { name: 'Daně' },
   ];
   const links = [
-    { source: 0, target: 1, value: incomeTax },
-    { source: 0, target: 2, value: employerSocialInsurance },
-    { source: 0, target: 3, value: employerHealthInsurance },
-    { source: 0, target: 4, value: wage },
+    { source: 0, target: 1, value: employerSocialInsurance },
+    { source: 0, target: 2, value: employerHealthInsurance },
+    { source: 0, target: 3, value: wage },
 
-    { source: 4, target: 5, value: employeeSocialInsurance },
-    { source: 4, target: 6, value: employeeHealthInsurance },
-    { source: 4, target: 7, value: taxedIncome },
+    { source: 3, target: 4, value: incomeTax },
+    { source: 3, target: 5, value: employeeSocialInsurance },
+    { source: 3, target: 6, value: employeeHealthInsurance },
+    { source: 3, target: 7, value: taxedIncome },
 
-    { source: 1, target: 8, value: incomeTax },
-    { source: 2, target: 8, value: employerSocialInsurance },
-    { source: 3, target: 8, value: employerHealthInsurance },
+    { source: 1, target: 8, value: employerSocialInsurance },
+    { source: 2, target: 8, value: employerHealthInsurance },
+    { source: 4, target: 8, value: incomeTax },
     { source: 5, target: 8, value: employeeSocialInsurance },
     { source: 6, target: 8, value: employeeHealthInsurance },
   ];

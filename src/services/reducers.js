@@ -4,8 +4,8 @@ import * as actionTypes from './actionTypes.js';
 
 
 const initialState = Immutable.Map({
-  income: 720000,
-  expense: 100000,
+  income: 360000,
+  expense: 50000,
   flatExpenseRate: 0.6,
 });
 
