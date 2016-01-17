@@ -1,5 +1,3 @@
-'use strict';
-
 import Immutable from 'immutable';
 
 import * as actionTypes from './actionTypes.js';

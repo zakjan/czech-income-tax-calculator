@@ -1,5 +1,3 @@
-'use strict';
-
 export const incomeTaxRate = 0.15;
 export const socialInsuranceRate = 0.28;
 export const healthInsuranceRate = 0.135;

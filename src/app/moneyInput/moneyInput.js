@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 
 import NumberInput from 'app/numberInput/numberInput.js';

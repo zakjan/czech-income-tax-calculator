@@ -1,5 +1,3 @@
-'use strict';
-
 import d3Color from 'd3-color';
 import d3Sankey from 'd3-sankey';
 import d3Scale from 'd3-scale';
