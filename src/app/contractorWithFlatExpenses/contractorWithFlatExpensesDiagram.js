@@ -21,34 +21,29 @@ const ContractorWithFlatExpensesDiagram = (props) => {
   const nodes = [
     { name: 'Příjmy' },
 
-    { name: 'Paušální výdaje' },
+    { name: 'Výdaje' },
     { name: 'Zdanitelný základ' },
 
     { name: 'Daň z příjmu' },
     { name: 'Sociální pojištění' },
     { name: 'Zdravotní pojištění' },
-    { name: 'Zisk po zdanění' },
 
-    { name: 'Výdaje' },
     { name: 'Daně' },
-    { name: 'Reálný zisk' },
+    { name: 'Zisk po zdanění' },
   ];
   const links = [
-    { source: 0, target: 1, value: flatExpense },
+    { source: 0, target: 1, value: expense },
     { source: 0, target: 2, value: taxableIncome },
 
     { source: 2, target: 3, value: incomeTax },
     { source: 2, target: 4, value: socialInsurance },
     { source: 2, target: 5, value: healthInsurance },
-    { source: 2, target: 6, value: taxedProfit },
 
-    { source: 1, target: 7, value: expense },
-    { source: 1, target: 9, value: unusedFlatExpense },
-
-    { source: 3, target: 8, value: incomeTax },
-    { source: 4, target: 8, value: socialInsurance },
-    { source: 5, target: 8, value: healthInsurance },
-    { source: 6, target: 9, value: taxedProfit },
+    { source: 3, target: 6, value: incomeTax },
+    { source: 4, target: 6, value: socialInsurance },
+    { source: 5, target: 6, value: healthInsurance },
+    { source: 2, target: 7, value: taxedProfit },
+    { source: 0, target: 7, value: unusedFlatExpense },
   ];
 
   return (

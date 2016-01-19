@@ -11,7 +11,7 @@ export const minimalSocialInsuranceTaxableIncome = 77652;
 export const minimalHealthInsuranceTaxableIncome = 155304;
 
 export const taxableIncomeFromIncomeAndExpense = (income, expense) => Math.ceil(Math.max(income - expense, 0) / 100) * 100;
-export const incomeTaxFromTaxableIncome = (taxableIncome) => taxableIncome * incomeTaxRate - incomeTaxDeductionForPayer;
+export const incomeTaxFromTaxableIncome = (taxableIncome) => Math.max(taxableIncome * incomeTaxRate - incomeTaxDeductionForPayer, 0);
 export const socialInsuranceFromTaxableIncome = (taxableIncome) => Math.max(taxableIncome / 2, minimalSocialInsuranceTaxableIncome) * socialInsuranceRate;
 export const healthInsuranceFromTaxableIncome = (taxableIncome) => Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome) * healthInsuranceRate;
 export const employeeSocialInsuranceFromWage = (wage) => wage * employeeSocialInsuranceRate;
