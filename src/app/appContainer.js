@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import App from './app.js';
-import * as actionCreators from 'services/actionCreators.js';
+import actions from 'services/actions.js';
 
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(actions, dispatch);
 };
 
 const AppContainer = (props) => {

@@ -22,7 +22,7 @@ const SankeyDiagram = React.createClass({
     this.clearDiagram();
 
     const nodes = this.props.nodes;
-    const links = this.props.links;
+    const links = this.props.links.map((x) => { x.value = Math.max(x.value, 0.1); return x; });
 
     const nodeWidth = 15;
     const nodePadding = 10;
@@ -85,9 +85,6 @@ const SankeyDiagram = React.createClass({
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
       .text((d) => sprintf('%s: %s', d.name, formatCurrency(d.value)));
-
-    sankey.relayout();
-    link.attr("d", path);
   },
 
   componentDidMount() {
