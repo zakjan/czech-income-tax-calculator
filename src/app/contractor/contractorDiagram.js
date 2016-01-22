@@ -1,18 +1,18 @@
 import React from 'react';
 
 import SankeyDiagram from 'app/sankeyDiagram/sankeyDiagram.js';
-import * as taxCalculator from 'services/taxCalculator.js';
+import TaxCalculator from 'services/taxCalculator.js';
 
 
 const ContractorDiagram = (props) => {
   const income = props.income;
   const expense = props.expense;
 
-  const taxableIncome = taxCalculator.taxableIncomeFromIncomeAndExpense(income, expense);
+  const taxableIncome = TaxCalculator.taxableIncomeFromIncomeAndExpense(income, expense);
 
-  const incomeTax = taxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
-  const socialInsurance = taxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);
-  const healthInsurance = taxCalculator.healthInsuranceFromTaxableIncome(taxableIncome);
+  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
+  const socialInsurance = TaxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);
+  const healthInsurance = TaxCalculator.healthInsuranceFromTaxableIncome(taxableIncome);
   const taxedProfit = taxableIncome - incomeTax - socialInsurance - healthInsurance;
 
   const nodes = [

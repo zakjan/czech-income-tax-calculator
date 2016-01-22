@@ -11,7 +11,7 @@ import './app.less';
 const App = (props) => {
   return (
     <div className="app">
-      <h1>Kalkulačka příjmů</h1>
+      <h1>Kalkulačka daně z příjmů</h1>
       <AppForm {...props} />
       <Employee {...props} />
       <ContractorWithFlatExpenses {...props} />
