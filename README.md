@@ -1,4 +1,6 @@
-# Czech Income Calculator
+# Czech Income Tax Calculator
+
+[![CircleCI](https://img.shields.io/circleci/project/zakjan/czech-income-tax-calculator.svg)](https://circleci.com/gh/zakjan/czech-income-tax-calculator)
 
 ## Dependencies
 
