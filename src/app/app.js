@@ -16,6 +16,7 @@ const App = (props) => {
       <Employee {...props} />
       <ContractorWithFlatExpenses {...props} />
       <Contractor {...props} />
+      <p><small><a href="https://github.com/zakjan/czech-income-tax-calculator">GitHub</a></small></p>
     </div>
   );
 };
