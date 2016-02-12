@@ -11,18 +11,18 @@ const IncomeInput = React.createClass({
   },
 
   onChangeIncomePerDay(value) {
-    this.props.onChange(value * 12 * 30);
+    this.props.onChange(value * 12 * 20);
   },
 
   onChangeIncomePerHour(value) {
-    this.props.onChange(value * 12 * 30 * 8);
+    this.props.onChange(value * 12 * 20 * 8);
   },
 
   render() {
     const income = this.props.value;
     const incomePerMonth = Math.floor(income / 12);
-    const incomePerDay = Math.floor(income / (12 * 30));
-    const incomePerHour = Math.floor(income / (12 * 30 * 8));
+    const incomePerDay = Math.floor(income / (12 * 20));
+    const incomePerHour = Math.floor(income / (12 * 20 * 8));
 
     return (
       <div className="income-input">
