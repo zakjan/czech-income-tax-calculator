@@ -28,6 +28,9 @@ module.exports = {
   },
   plugins: [
     new Webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+      },
       APP_NAME: JSON.stringify(APP_NAME),
     }),
     new Webpack.ProvidePlugin({

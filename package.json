@@ -1,12 +1,12 @@
 {
-  "name": "czech-income-calculator",
+  "name": "czech-income-tax-calculator",
   "version": "0.0.0",
-  "description": "Czech Income Calculator",
+  "description": "Czech Income Tax Calculator",
   "author": "Jan Žák <zj@zakjan.cz>",
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "release": "webpack -p",
+    "release": "NODE_ENV=production webpack -p",
     "start": "node web.js"
   },
   "devDependencies": {
