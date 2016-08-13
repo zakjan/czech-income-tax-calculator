@@ -1,4 +1,3 @@
-import d3Color from 'd3-color';
 import d3Sankey from 'd3-sankey';
 import * as d3Scale from 'd3-scale';
 import * as d3Selection from 'd3-selection';

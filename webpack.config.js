@@ -5,7 +5,7 @@ var Promise = require('es6-promise').Promise;
 var Webpack = require('webpack');
 var sprintf = require('sprintf-js').sprintf;
 
-var APP_NAME = 'Kalkulačka daně z příjmů';
+var APP_NAME = 'Kalkulačka daně z příjmu';
 
 
 module.exports = {

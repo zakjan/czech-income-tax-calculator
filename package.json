@@ -1,6 +1,6 @@
 {
   "name": "czech-income-tax-calculator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Czech Income Tax Calculator",
   "author": "Jan Žák <zj@zakjan.cz>",
   "scripts": {
@@ -18,7 +18,6 @@
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.23.1",
     "d3": "^4.2.1",
-    "d3-color": "^1.0.1",
     "d3-format": "^1.0.2",
     "d3-sankey": "^0.2.1",
     "d3-scale": "^1.0.3",

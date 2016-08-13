@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ContractorForm from './contractorForm.js';
-import ContractorDiagram from './contractorDiagram.js';
+import ContractorForm from './form.js';
+import ContractorDiagram from './diagram.js';
 
 
-const Contractor = (props) => {
+const ContractorTab = (props) => {
   return (
     <div>
       <h2>OSVČ</h2>
@@ -15,4 +15,4 @@ const Contractor = (props) => {
 };
 
 
-export default Contractor;
+export default ContractorTab;

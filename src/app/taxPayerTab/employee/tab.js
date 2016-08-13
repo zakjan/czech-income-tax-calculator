@@ -1,10 +1,10 @@
 import React from 'react';
 
-import EmployeeForm from './employeeForm.js';
-import EmployeeDiagram from './employeeDiagram.js';
+import EmployeeForm from './form.js';
+import EmployeeDiagram from './diagram.js';
 
 
-const Employee = (props) => {
+const EmployeeTab = (props) => {
   return (
     <div>
       <h2>Zaměstanec</h2>
@@ -15,4 +15,4 @@ const Employee = (props) => {
 };
 
 
-export default Employee;
+export default EmployeeTab;
