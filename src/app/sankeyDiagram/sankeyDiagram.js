@@ -1,10 +1,11 @@
 import d3Color from 'd3-color';
 import d3Sankey from 'd3-sankey';
-import d3Scale from 'd3-scale';
-import d3Selection from 'd3-selection';
-import d3Format from 'd3-format';
+import * as d3Scale from 'd3-scale';
+import * as d3Selection from 'd3-selection';
+import * as d3Format from 'd3-format';
+import d3FormatCsCzLocale from 'd3-format/locale/cs-CZ.json';
 import React from 'react';
-import { sprintf } from 'underscore.string';
+import {sprintf} from 'sprintf-js';
 
 import './sankeyDiagram.less';
 
@@ -34,8 +35,9 @@ const SankeyDiagram = React.createClass({
     const width = diagramWidth + 2 * padding + linkWidth;
     const height = diagramHeight + 2 * padding;
 
-    const formatCurrency = d3Format.localeCsCz.format('$,d');
-    const colorScale = d3Scale.category20();
+    d3Format.formatDefaultLocale(d3FormatCsCzLocale);
+    const formatCurrency = d3Format.format('$,d');
+    const colorScale = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
 
     const svg = d3Selection.select(this.refs.el).append('svg')
       .attr('class', 'sankey-diagram')

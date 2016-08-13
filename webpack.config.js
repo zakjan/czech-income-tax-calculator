@@ -2,10 +2,10 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var Promise = require('es6-promise').Promise;
-var UnderscoreString = require('underscore.string');
 var Webpack = require('webpack');
+var sprintf = require('sprintf-js').sprintf;
 
-var APP_NAME = 'Kalkulačka příjmů';
+var APP_NAME = 'Kalkulačka daně z příjmů';
 
 
 module.exports = {
@@ -18,6 +18,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
+      { test: /\.json$/, loader: 'json'},
       { test: /\.css$/, loader: 'style!css'},
       { test: /\.less$/, loader: 'style!css!less'},
       { test: /\.(png|jpg|gif|svg|woff|woff2|ttf|eot)(\?.*)?$/, loader: 'file?name=[path][name].[ext]' },
@@ -38,11 +39,11 @@ module.exports = {
       Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
     }),
     new Webpack.BannerPlugin(
-      UnderscoreString.sprintf('%s (build %s)', APP_NAME, new Date().toISOString())
+      sprintf('%s (build %s)', APP_NAME, new Date().toISOString())
     ),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html',
+      template: 'index.html',
       title: APP_NAME,
     }),
   ],
