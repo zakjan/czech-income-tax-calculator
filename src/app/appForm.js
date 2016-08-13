@@ -1,34 +1,44 @@
 import React from 'react';
 
-import IncomeInput from 'app/incomeInput/incomeInput.js';
-import MoneyInput from 'app/moneyInput/moneyInput.js';
-import NumberSelect from 'app/numberSelect/numberSelect.js';
+import TaxPayerType from 'models/taxPayerType.js';
 
 
 const AppForm = (props) => {
   return (
-    <table>
-      <tbody>
-        <tr>
-          <td>Příjmy:</td>
-          <td><IncomeInput value={props.income} onChange={props.setIncome} /></td>
-        </tr>
-        <tr>
-          <td>Výdaje:</td>
-          <td><MoneyInput value={props.expense} onChange={props.setExpense} /></td>
-        </tr>
-        <tr>
-          <td>Paušální výdaje:</td>
-          <td>
-            <NumberSelect value={props.flatExpenseRate} onChange={props.setFlatExpenseRate}>
-              <option value="0.4">40%</option>
-              <option value="0.6">60%</option>
-              <option value="0.8">80%</option>
-            </NumberSelect>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <p>
+      <label>
+        <input
+          type="radio"
+          name="taxPayerType"
+          value={TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
+          checked={props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
+          onChange={(event) => props.setTaxPayerType(event.target.value)}
+        />
+        OSVČ s paušálními výdaji
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          name="taxPayerType"
+          value={TaxPayerType.CONTRACTOR}
+          checked={props.taxPayerType === TaxPayerType.CONTRACTOR}
+          onChange={(event) => props.setTaxPayerType(event.target.value)}
+        />
+        OSVČ
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          name="taxPayerType"
+          value={TaxPayerType.EMPLOYEE}
+          checked={props.taxPayerType === TaxPayerType.EMPLOYEE}
+          onChange={(event) => props.setTaxPayerType(event.target.value)}
+        />
+        Zaměstnanec
+      </label>
+    </p>
   );
 };
 

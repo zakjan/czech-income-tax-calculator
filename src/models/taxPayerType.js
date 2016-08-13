@@ -1,0 +1,7 @@
+const TaxPayerType = {
+  CONTRACTOR_WITH_FLAT_EXPENSES: "CONTRACTOR_WITH_FLAT_EXPENSES",
+  CONTRACTOR: "CONTRACTOR",
+  EMPLOYEE: "EMPLOYEE",
+};
+
+export default TaxPayerType;

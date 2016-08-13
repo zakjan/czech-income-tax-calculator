@@ -6,13 +6,11 @@ import TaxCalculator from 'services/taxCalculator.js';
 
 const ContractorWithFlatExpensesDiagram = (props) => {
   const income = props.income;
-  const expense = props.expense;
   const flatExpenseRate = props.flatExpenseRate;
+  const expense = income * flatExpenseRate;
 
-  const flatExpense = income * flatExpenseRate;
-  const taxableIncome = income - flatExpense;
+  const taxableIncome = income - expense;
 
-  const unusedFlatExpense = flatExpense - expense;
   const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
   const socialInsurance = TaxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);
   const healthInsurance = TaxCalculator.healthInsuranceFromTaxableIncome(taxableIncome);
@@ -43,7 +41,6 @@ const ContractorWithFlatExpensesDiagram = (props) => {
     { source: 4, target: 6, value: socialInsurance },
     { source: 5, target: 6, value: healthInsurance },
     { source: 2, target: 7, value: taxedProfit },
-    { source: 0, target: 7, value: unusedFlatExpense },
   ];
 
   return (
