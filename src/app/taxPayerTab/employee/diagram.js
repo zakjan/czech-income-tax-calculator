@@ -19,15 +19,15 @@ const EmployeeDiagram = (props) => {
     { name: 'Superhrubá mzda', color: '#1f77b4' },
 
     { name: 'Hrubá mzda', color: '#aec7e8' },
-    { name: '' },
-    { name: '' },
+    { name: 'Sociální pojištění', color: '#ff7f0e' },
+    { name: 'Zdravotní pojištění', color: '#ffbb78' },
 
-    { name: '' },
+    {},
     { name: 'Daň z příjmu', color: '#ff9896' },
     { name: 'Sociální pojištění', color: '#ff7f0e' },
     { name: 'Zdravotní pojištění', color: '#ffbb78' },
-    { name: 'Sociální pojištění z.', color: '#ff7f0e' },
-    { name: 'Zdravotní pojištění z.', color: '#ffbb78' },
+    {},
+    {},
 
     { name: 'Čistá mzda', color: '#2ca02c' },
     { name: 'Daně', color: '#d62728' },

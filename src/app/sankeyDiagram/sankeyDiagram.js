@@ -1,4 +1,6 @@
 import d3Sankey from 'd3-sankey';
+import * as d3Array from 'd3-array';
+import * as d3Collection from 'd3-collection';
 import * as d3Scale from 'd3-scale';
 import * as d3Selection from 'd3-selection';
 import * as d3Format from 'd3-format';
@@ -53,6 +55,25 @@ const SankeyDiagram = React.createClass({
       .links(links)
       .layout(32);
 
+    // spread nodes
+    const nodesByBreadth = d3Collection.nest()
+      .key(function(d) { return d.x; })
+      .entries(nodes)
+      .map(function(d) { return d.values; });
+    nodesByBreadth.forEach(function(nodes) {
+      var i,
+        node,
+        sum = d3Array.sum(nodes, function(o) { return o.dy; }),
+        padding = (height - sum - 10) / nodes.length,
+        y0 = 0;
+      nodes.sort(function(a, b) { return a.y - b.y; });
+      for (i = 0; i < nodes.length; ++i) {
+        node = nodes[i];
+        node.y = y0;
+        y0 += node.dy + padding;
+      }
+    });
+
     const path = sankey.link();
 
     const link = svg.append('g').selectAll('.link')
@@ -101,7 +122,8 @@ const SankeyDiagram = React.createClass({
 
 SankeyDiagram.propTypes = {
   nodes: React.PropTypes.arrayOf(React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string,
+    color: React.PropTypes.string,
   })).isRequired,
   links: React.PropTypes.arrayOf(React.PropTypes.shape({
     source: React.PropTypes.number.isRequired,

@@ -18,14 +18,14 @@ const ContractorDiagram = (props) => {
   const nodes = [
     { name: 'Příjmy', color: '#1f77b4' },
 
-    { name: '' },
+    {},
     { name: 'Zdanitelný základ', color: '#aec7e8' },
 
-    { name: '' },
+    {},
     { name: 'Daň z příjmu', color: '#ff9896' },
     { name: 'Sociální pojištění', color: '#ff7f0e' },
     { name: 'Zdravotní pojištění', color: '#ffbb78' },
-    { name: '' },
+    {},
 
     { name: 'Výdaje', color: '#98df8a' },
     { name: 'Daně', color: '#d62728' },
