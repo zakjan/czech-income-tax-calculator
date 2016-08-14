@@ -7,8 +7,8 @@ import TaxPayerType from 'models/taxPayerType.js';
 
 const initialState = Immutable.Map({
   taxPayerType: TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES,
-  income: 600000,
-  expense: 50000,
+  income: 480000,
+  expense: 200000,
   flatExpenseRate: 0.6,
 });
 

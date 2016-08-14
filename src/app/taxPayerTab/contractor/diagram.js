@@ -16,30 +16,36 @@ const ContractorDiagram = (props) => {
   const taxedProfit = taxableIncome - incomeTax - socialInsurance - healthInsurance;
 
   const nodes = [
-    { name: 'Příjmy' },
+    { name: 'Příjmy', color: '#1f77b4' },
 
-    { name: 'Výdaje' },
-    { name: 'Zdanitelný základ' },
+    { name: '' },
+    { name: 'Zdanitelný základ', color: '#aec7e8' },
 
-    { name: 'Daň z příjmu' },
-    { name: 'Sociální pojištění' },
-    { name: 'Zdravotní pojištění' },
+    { name: '' },
+    { name: 'Daň z příjmu', color: '#ff9896' },
+    { name: 'Sociální pojištění', color: '#ff7f0e' },
+    { name: 'Zdravotní pojištění', color: '#ffbb78' },
+    { name: '' },
 
-    { name: 'Daně' },
-    { name: 'Zisk po zdanění' },
+    { name: 'Výdaje', color: '#98df8a' },
+    { name: 'Daně', color: '#d62728' },
+    { name: 'Zisk po zdanění', color: '#2ca02c' },
   ];
   const links = [
     { source: 0, target: 1, value: expense },
     { source: 0, target: 2, value: taxableIncome },
 
-    { source: 2, target: 3, value: incomeTax },
-    { source: 2, target: 4, value: socialInsurance },
-    { source: 2, target: 5, value: healthInsurance },
-
-    { source: 3, target: 6, value: incomeTax },
-    { source: 4, target: 6, value: socialInsurance },
-    { source: 5, target: 6, value: healthInsurance },
+    { source: 1, target: 3, value: expense },
+    { source: 2, target: 4, value: incomeTax },
+    { source: 2, target: 5, value: socialInsurance },
+    { source: 2, target: 6, value: healthInsurance },
     { source: 2, target: 7, value: taxedProfit },
+
+    { source: 3, target: 8, value: expense },
+    { source: 4, target: 9, value: incomeTax },
+    { source: 5, target: 9, value: socialInsurance },
+    { source: 6, target: 9, value: healthInsurance },
+    { source: 7, target: 10, value: taxedProfit },
   ];
 
   return (

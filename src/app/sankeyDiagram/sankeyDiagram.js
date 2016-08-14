@@ -62,10 +62,6 @@ const SankeyDiagram = React.createClass({
       .attr('d', path)
       .style('stroke-width', (d) => d.dy);
 
-    link
-      .append('title')
-      .text((d) => sprintf('%s → %s\n%s', d.source.name, d.target.name, formatCurrency(d.value)));
-
     const node = svg.append('g').selectAll('.node')
       .data(nodes)
       .enter().append('g')
@@ -76,7 +72,7 @@ const SankeyDiagram = React.createClass({
       .append('rect')
       .attr('width', sankey.nodeWidth())
       .attr('height', (d) => d.dy)
-      .style('fill', (d) => colorScale(d.name))
+      .style('fill', (d) => d.color || '#eeeeee')
       .append('title')
       .text((d) => sprintf('%s\n%s', d.name, formatCurrency(d.value)));
 
@@ -85,7 +81,7 @@ const SankeyDiagram = React.createClass({
       .append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
-      .text((d) => sprintf('%s: %s', d.name, formatCurrency(d.value)));
+      .text((d) => d.name ? sprintf('%s: %s', d.name, formatCurrency(d.value)) : '');
   },
 
   componentDidMount() {
