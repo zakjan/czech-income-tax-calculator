@@ -18,38 +18,38 @@ const EmployeeDiagram = (props) => {
   const nodes = [
     { name: 'Superhrubá mzda', color: '#1f77b4' },
 
+    { name: 'Sociální pojištění', color: '#ffbb78' },
+    { name: 'Zdravotní pojištění', color: '#ffbb78' },
     { name: 'Hrubá mzda', color: '#aec7e8' },
-    { name: 'Sociální pojištění', color: '#ff7f0e' },
-    { name: 'Zdravotní pojištění', color: '#ffbb78' },
 
     {},
-    { name: 'Daň z příjmu', color: '#ff9896' },
-    { name: 'Sociální pojištění', color: '#ff7f0e' },
+    {},
+    { name: 'Daň z příjmu', color: '#ffbb78' },
+    { name: 'Sociální pojištění', color: '#ffbb78' },
     { name: 'Zdravotní pojištění', color: '#ffbb78' },
     {},
-    {},
 
-    { name: 'Čistá mzda', color: '#2ca02c' },
     { name: 'Daně', color: '#d62728' },
+    { name: 'Čistá mzda', color: '#2ca02c' },
   ];
   const links = [
-    { source: 0, target: 1, value: wage },
-    { source: 0, target: 2, value: employerSocialInsurance },
-    { source: 0, target: 3, value: employerHealthInsurance },
+    { source: 0, target: 1, value: employerSocialInsurance },
+    { source: 0, target: 2, value: employerHealthInsurance },
+    { source: 0, target: 3, value: wage },
 
-    { source: 1, target: 5, value: incomeTax },
-    { source: 1, target: 6, value: employeeSocialInsurance },
-    { source: 1, target: 7, value: employeeHealthInsurance },
-    { source: 1, target: 4, value: taxedIncome },
-    { source: 2, target: 8, value: employerSocialInsurance },
-    { source: 3, target: 9, value: employerHealthInsurance },
+    { source: 1, target: 4, value: employerSocialInsurance },
+    { source: 2, target: 5, value: employerHealthInsurance },
+    { source: 3, target: 6, value: incomeTax },
+    { source: 3, target: 7, value: employeeSocialInsurance },
+    { source: 3, target: 8, value: employeeHealthInsurance },
+    { source: 3, target: 9, value: taxedIncome },
 
-    { source: 4, target: 10, value: taxedIncome },
-    { source: 8, target: 11, value: employerSocialInsurance },
-    { source: 9, target: 11, value: employerHealthInsurance },
-    { source: 5, target: 11, value: incomeTax },
-    { source: 6, target: 11, value: employeeSocialInsurance },
-    { source: 7, target: 11, value: employeeHealthInsurance },
+    { source: 4, target: 10, value: employerSocialInsurance },
+    { source: 5, target: 10, value: employerHealthInsurance },
+    { source: 6, target: 10, value: incomeTax },
+    { source: 7, target: 10, value: employeeSocialInsurance },
+    { source: 8, target: 10, value: employeeHealthInsurance },
+    { source: 9, target: 11, value: taxedIncome },
   ];
 
   return (

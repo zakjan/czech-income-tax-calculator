@@ -53,9 +53,10 @@ const SankeyDiagram = React.createClass({
       .nodePadding(nodePadding)
       .nodes(nodes)
       .links(links)
-      .layout(32);
+      .layout(0);
 
     // spread nodes
+    // see https://github.com/q-m/d3.chart.sankey/blob/83fdab5/src/sankey.js#L209
     const nodesByBreadth = d3Collection.nest()
       .key(function(d) { return d.x; })
       .entries(nodes)

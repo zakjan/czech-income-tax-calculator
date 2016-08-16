@@ -22,12 +22,12 @@ const ContractorDiagram = (props) => {
     { name: 'Zdanitelný základ', color: '#aec7e8' },
 
     {},
-    { name: 'Daň z příjmu', color: '#ff9896' },
-    { name: 'Sociální pojištění', color: '#ff7f0e' },
+    { name: 'Daň z příjmu', color: '#ffbb78' },
+    { name: 'Sociální pojištění', color: '#ffbb78' },
     { name: 'Zdravotní pojištění', color: '#ffbb78' },
     {},
 
-    { name: 'Výdaje', color: '#98df8a' },
+    { name: 'Výdaje', color: '#ff7f0e' },
     { name: 'Daně', color: '#d62728' },
     { name: 'Zisk po zdanění', color: '#2ca02c' },
   ];
