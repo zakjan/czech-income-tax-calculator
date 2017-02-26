@@ -17,6 +17,10 @@ const minimalHealthInsuranceTaxableIncome = 155304;
 
 
 const TaxCalculator = {
+  getYear: () => {
+    return 2016;
+  },
+
   expenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
     return Math.min(income, maximalIncomeForFlatExpense) * flatExpenseRate;
   },
