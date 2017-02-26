@@ -6,7 +6,6 @@ import * as d3Selection from 'd3-selection';
 import * as d3Format from 'd3-format';
 import d3FormatCsCzLocale from 'd3-format/locale/cs-CZ.json';
 import React from 'react';
-import {sprintf} from 'sprintf-js';
 
 import './sankeyDiagram.less';
 
@@ -45,7 +44,7 @@ const SankeyDiagram = React.createClass({
       .attr('width', width)
       .attr('height', height)
       .append('g')
-      .attr('transform', sprintf('translate(%d, %d)', padding, padding));
+      .attr('transform', `translate(${padding}, ${padding})`);
 
     const sankey = d3Sankey.sankey()
       .size([diagramWidth, diagramHeight])
@@ -88,22 +87,20 @@ const SankeyDiagram = React.createClass({
       .data(nodes)
       .enter().append('g')
       .attr('class', 'node')
-      .attr('transform', (d) => sprintf('translate(%.0f, %.0f)', d.x, d.y));
+      .attr('transform', (d) => `translate(${d.x}, ${d.y})`);
 
     node
       .append('rect')
       .attr('width', sankey.nodeWidth())
       .attr('height', (d) => d.dy)
-      .style('fill', (d) => d.color || '#eeeeee')
-      .append('title')
-      .text((d) => sprintf('%s\n%s', d.name, formatCurrency(d.value)));
+      .style('fill', (d) => d.color || '#eeeeee');
 
     node
       .filter((d) => d.value > 0)
       .append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
-      .text((d) => d.name ? sprintf('%s: %s', d.name, formatCurrency(d.value)) : '');
+      .text((d) => d.name ? `${d.name}: ${formatCurrency(d.value)}` : '');
   },
 
   componentDidMount() {

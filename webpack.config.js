@@ -3,7 +3,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var Promise = require('es6-promise').Promise;
 var Webpack = require('webpack');
-var sprintf = require('sprintf-js').sprintf;
 
 var APP_NAME = 'Kalkulačka daně z příjmů';
 
@@ -39,7 +38,7 @@ module.exports = {
       Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
     }),
     new Webpack.BannerPlugin(
-      sprintf('%s (build %s)', APP_NAME, new Date().toISOString())
+      `${APP_NAME} (build ${new Date().toISOString()})`
     ),
     new HtmlWebpackPlugin({
       filename: 'index.html',
