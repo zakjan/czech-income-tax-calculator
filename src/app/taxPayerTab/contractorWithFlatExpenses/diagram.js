@@ -9,7 +9,7 @@ const ContractorWithFlatExpensesDiagram = (props) => {
   const flatExpenseRate = props.flatExpenseRate;
   const expense = income * flatExpenseRate;
 
-  const taxableIncome = income - expense;
+  const taxableIncome = TaxCalculator.taxableIncomeFromIncomeAndExpense(income, expense);
 
   const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
   const socialInsurance = TaxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);

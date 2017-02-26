@@ -11,7 +11,7 @@ const minimalSocialInsuranceTaxableIncome = 77652;
 const minimalHealthInsuranceTaxableIncome = 155304;
 
 const TaxCalculator = {
-  taxableIncomeFromIncomeAndExpense: (income, expense) => Math.ceil(Math.max(income - expense, 0) / 100) * 100,
+  taxableIncomeFromIncomeAndExpense: (income, expense) => Math.floor(Math.max(income - expense, 0) / 100) * 100,
   incomeTaxFromTaxableIncome: (taxableIncome) => Math.max(taxableIncome * incomeTaxRate - incomeTaxDeductionForPayer, 0),
   socialInsuranceFromTaxableIncome: (taxableIncome) => Math.max(taxableIncome / 2, minimalSocialInsuranceTaxableIncome) * socialInsuranceRate,
   healthInsuranceFromTaxableIncome: (taxableIncome) => Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome) * healthInsuranceRate,
