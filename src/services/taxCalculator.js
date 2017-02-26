@@ -6,7 +6,7 @@ const socialInsuranceRate = 0.28;
 const employeeSocialInsuranceRate = 0.065;
 const employerSocialInsuranceRate = 0.25;
 const minimalSocialInsuranceTaxableIncome = 77652;
-const maximalSocialInsuranceTaxableIncome = 1355136;
+const maximalSocialInsuranceTaxableIncome = 1296288;
 
 const healthInsuranceRate = 0.135;
 const employeeHealthInsuranceRate = 0.045;
