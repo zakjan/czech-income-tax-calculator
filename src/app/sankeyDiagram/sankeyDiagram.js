@@ -27,7 +27,7 @@ const SankeyDiagram = React.createClass({
 
     const nodeWidth = 15;
     const nodePadding = 10;
-    const linkWidth = 200;
+    const linkWidth = 250;
     const columns = 4;
     const diagramWidth = (columns - 1) * linkWidth + columns * nodeWidth;
     const diagramHeight = diagramWidth / 4;
@@ -53,6 +53,8 @@ const SankeyDiagram = React.createClass({
       .nodes(nodes)
       .links(links)
       .layout(0);
+
+    const totalValue = sankey.nodes()[0].value;
 
     // spread nodes
     // see https://github.com/q-m/d3.chart.sankey/blob/83fdab5/src/sankey.js#L209
@@ -100,7 +102,7 @@ const SankeyDiagram = React.createClass({
       .append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', (d) => d.dy / 2)
-      .text((d) => d.name ? `${d.name}: ${formatCurrency(d.value)}` : '');
+      .text((d) => d.name ? `${d.name}: ${formatCurrency(d.value)} (${Math.round(d.value / totalValue * 100)} %)` : '');
   },
 
   componentDidMount() {
