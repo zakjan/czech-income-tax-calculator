@@ -5,25 +5,34 @@ import actionTypes from './actionTypes.js';
 import TaxPayerType from 'models/taxPayerType.js';
 
 
+const savedState = JSON.parse(window.localStorage.getItem('state') || '{}');
 const initialState = Immutable.Map({
-  taxPayerType: TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES,
-  income: 480000,
-  expense: 300000,
-  flatExpenseRate: 0.6,
+  taxPayerType: savedState.taxPayerType || TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES,
+  income: savedState.income || 480000,
+  expense: savedState.expense || 300000,
+  flatExpenseRate: savedState.flatExpenseRate || 0.6,
 });
 
 const reducer = handleActions({
   [actionTypes.SET_TAX_PAYER_TYPE]: (state, action) => {
-    return state.set('taxPayerType', action.payload);
+    const newState = state.set('taxPayerType', action.payload);
+    window.localStorage.setItem('state', JSON.stringify(newState));
+    return newState;
   },
   [actionTypes.SET_INCOME]: (state, action) => {
-    return state.set('income', action.payload);
+    const newState = state.set('income', action.payload);
+    window.localStorage.setItem('state', JSON.stringify(newState));
+    return newState;
   },
   [actionTypes.SET_EXPENSE]: (state, action) => {
-    return state.set('expense', action.payload);
+    const newState = state.set('expense', action.payload);
+    window.localStorage.setItem('state', JSON.stringify(newState));
+    return newState;
   },
   [actionTypes.SET_FLAT_EXPENSE_RATE]: (state, action) => {
-    return state.set('flatExpenseRate', action.payload);
+    const newState = state.set('flatExpenseRate', action.payload);
+    window.localStorage.setItem('state', JSON.stringify(newState));
+    return newState;
   },
 }, initialState);
 
