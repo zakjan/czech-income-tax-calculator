@@ -1,5 +1,7 @@
 const maximalIncomeForFlatExpense = 2000000;
 const incomeTaxRate = 0.15;
+const incomeThresholdZone2 = 1296288;
+const incomeTaxRateZone2 = 0.22;
 const incomeTaxDeductionForPayer = 24840;
 
 const socialInsuranceRate = 0.28;
@@ -20,19 +22,26 @@ const TaxCalculator = {
   },
 
   taxableIncomeFromIncomeAndExpense: (income, expense) => {
-    return Math.floor(Math.max(income - expense, 0) / 100) * 100;
+    const taxableIncome = Math.max(income - expense, 0);
+    return Math.floor(taxableIncome / 100) * 100;
   },
 
   incomeTaxFromTaxableIncome: (taxableIncome) => {
-    return Math.max(taxableIncome * incomeTaxRate - incomeTaxDeductionForPayer, 0);
+    const deductions = incomeTaxDeductionForPayer;
+    const incomeTaxZone1 = Math.min(taxableIncome, incomeThresholdZone2) * incomeTaxRate;
+    const incomeTaxZone2 = Math.max(taxableIncome - incomeThresholdZone2, 0) * incomeTaxRateZone2;
+    const incomeTax = incomeTaxZone1 + incomeTaxZone2;
+    return Math.max(incomeTax - deductions, 0);
   },
 
   socialInsuranceFromTaxableIncome: (taxableIncome) => {
-    return Math.min(Math.max(taxableIncome / 2, minimalSocialInsuranceTaxableIncome), maximalSocialInsuranceTaxableIncome) * socialInsuranceRate;
+    const socialInsuranceTaxableBase = Math.max(Math.min(taxableIncome / 2, maximalSocialInsuranceTaxableIncome), minimalSocialInsuranceTaxableIncome);
+    return socialInsuranceTaxableBase * socialInsuranceRate;
   },
 
   healthInsuranceFromTaxableIncome: (taxableIncome) => {
-    return Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome) * healthInsuranceRate;
+    const healthInsuranceTaxableBase = Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome);
+    return healthInsuranceTaxableBase * healthInsuranceRate;
   },
 
   employeeSocialInsuranceFromWage: (wage) => {
