@@ -1,18 +1,24 @@
+const maximalIncomeForFlatExpense = 2000000;
 const incomeTaxRate = 0.15;
-const socialInsuranceRate = 0.28;
-const healthInsuranceRate = 0.135;
-const employeeSocialInsuranceRate = 0.065;
-const employeeHealthInsuranceRate = 0.045;
-const employerSocialInsuranceRate = 0.25;
-const employerHealthInsuranceRate = 0.09;
-
 const incomeTaxDeductionForPayer = 24840;
+
+const socialInsuranceRate = 0.28;
+const employeeSocialInsuranceRate = 0.065;
+const employerSocialInsuranceRate = 0.25;
 const minimalSocialInsuranceTaxableIncome = 77652;
-const minimalHealthInsuranceTaxableIncome = 155304;
 const maximalSocialInsuranceTaxableIncome = 1355136;
+
+const healthInsuranceRate = 0.135;
+const employeeHealthInsuranceRate = 0.045;
+const employerHealthInsuranceRate = 0.09;
+const minimalHealthInsuranceTaxableIncome = 155304;
 
 
 const TaxCalculator = {
+  expenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
+    return Math.min(income, maximalIncomeForFlatExpense) * flatExpenseRate;
+  },
+
   taxableIncomeFromIncomeAndExpense: (income, expense) => {
     return Math.floor(Math.max(income - expense, 0) / 100) * 100;
   },

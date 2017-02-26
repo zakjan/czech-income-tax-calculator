@@ -7,7 +7,7 @@ import TaxCalculator from 'services/taxCalculator.js';
 const ContractorWithFlatExpensesDiagram = (props) => {
   const income = props.income;
   const flatExpenseRate = props.flatExpenseRate;
-  const expense = income * flatExpenseRate;
+  const expense = TaxCalculator.expenseFromIncomeAndFlatExpenseRate(income, flatExpenseRate);
 
   const taxableIncome = TaxCalculator.taxableIncomeFromIncomeAndExpense(income, expense);
 
