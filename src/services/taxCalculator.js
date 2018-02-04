@@ -1,24 +1,24 @@
-const maximalIncomeForFlatExpense = 2000000;
+const maximalIncomeForFlatExpense = 2000000; // 1000000 in 2017 applies only if payer decides to apply new rules
 const incomeTaxRate = 0.15;
-const incomeThresholdZone2 = 1296288;
+const incomeThresholdZone2 = 1355136;
 const incomeTaxRateZone2 = 0.22;
 const incomeTaxDeductionForPayer = 24840;
 
 const socialInsuranceRate = 0.28;
 const employeeSocialInsuranceRate = 0.065;
 const employerSocialInsuranceRate = 0.25;
-const minimalSocialInsuranceTaxableIncome = 77652;
-const maximalSocialInsuranceTaxableIncome = 1296288;
+const minimalSocialInsuranceTaxableIncome = 84696;
+const maximalSocialInsuranceTaxableIncome = 1355136;
 
 const healthInsuranceRate = 0.135;
 const employeeHealthInsuranceRate = 0.045;
 const employerHealthInsuranceRate = 0.09;
-const minimalHealthInsuranceTaxableIncome = 155304;
+const minimalHealthInsuranceTaxableIncome = 169392;
 
 
 const TaxCalculator = {
   getYear: () => {
-    return 2016;
+    return 2017;
   },
 
   expenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
