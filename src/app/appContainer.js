@@ -6,15 +6,15 @@ import App from './app.js';
 import actions from 'services/actions.js';
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return state.toJS();
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(actions, dispatch);
 };
 
-const AppContainer = (props) => {
+const AppContainer = props => {
   return (
     <App {...props} />
   );

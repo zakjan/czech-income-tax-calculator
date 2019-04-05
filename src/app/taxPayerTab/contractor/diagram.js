@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SankeyDiagram from 'app/sankeyDiagram/sankeyDiagram.js';
 import TaxCalculator from 'services/taxCalculator.js';
 
 
-const ContractorDiagram = (props) => {
+const ContractorDiagram = props => {
   const income = props.income;
   const expense = props.expense;
 
@@ -54,8 +55,8 @@ const ContractorDiagram = (props) => {
 };
 
 ContractorDiagram.propTypes = {
-  income: React.PropTypes.number.isRequired,
-  expense: React.PropTypes.number.isRequired,
+  income: PropTypes.number.isRequired,
+  expense: PropTypes.number.isRequired,
 };
 
 

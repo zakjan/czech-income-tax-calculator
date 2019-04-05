@@ -4,7 +4,7 @@ import IncomeInput from 'app/incomeInput/incomeInput.js';
 import NumberSelect from 'app/numberSelect/numberSelect.js';
 
 
-const ContractorWithFlatExpensesForm = (props) => {
+const ContractorWithFlatExpensesForm = props => {
   return (
     <table>
       <tbody>

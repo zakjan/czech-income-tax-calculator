@@ -1,22 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import MoneyInput from 'app/moneyInput/moneyInput.js';
 
 import './incomeInput.less';
 
 
-const IncomeInput = React.createClass({
+class IncomeInput extends React.Component {
   onChangeIncomePerMonth(value) {
     this.props.onChange(value * 12);
-  },
+  }
 
   onChangeIncomePerDay(value) {
     this.props.onChange(value * 12 * 20);
-  },
+  }
 
   onChangeIncomePerHour(value) {
     this.props.onChange(value * 12 * 20 * 8);
-  },
+  }
 
   render() {
     const income = this.props.value;
@@ -32,12 +33,12 @@ const IncomeInput = React.createClass({
         <p><MoneyInput value={incomePerHour} onChange={this.onChangeIncomePerHour} /> / hodina</p>
       </div>
     );
-  },
-});
+  }
+}
 
 IncomeInput.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 

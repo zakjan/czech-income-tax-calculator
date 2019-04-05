@@ -14,17 +14,17 @@ module.exports = {
     path: __dirname + '/dist',
     filename: 'main.js',
   },
+  devtool: 'eval-source-map',
   module: {
-    loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-      { test: /\.json$/, loader: 'json'},
-      { test: /\.css$/, loader: 'style!css'},
-      { test: /\.less$/, loader: 'style!css!less'},
-      { test: /\.(png|jpg|gif|svg|woff|woff2|ttf|eot)(\?.*)?$/, loader: 'file?name=[path][name].[ext]' },
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+      { test: /\.css$/, use: ['style-loader', 'css-loader']},
+      { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader']},
+      { test: /\.(png|jpg|gif|svg|woff|woff2|ttf|eot)(\?.*)?$/, loader: 'file-loader', options: { name: '[path][name].[ext]' } },
     ],
   },
   resolve: {
-    modulesDirectories: ['node_modules', 'src'],
+    modules: ['node_modules', 'src'],
   },
   plugins: [
     new Webpack.DefinePlugin({

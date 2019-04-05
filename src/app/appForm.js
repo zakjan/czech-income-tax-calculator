@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TaxPayerType from 'models/taxPayerType.js';
 
 
-const AppForm = (props) => {
+const AppForm = props => {
   return (
     <p>
       <label>
@@ -12,7 +13,7 @@ const AppForm = (props) => {
           name="taxPayerType"
           value={TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
           checked={props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
-          onChange={(event) => props.setTaxPayerType(event.target.value)}
+          onChange={event => props.setTaxPayerType(event.target.value)}
         />
         OSVČ s paušálními výdaji
       </label>
@@ -23,7 +24,7 @@ const AppForm = (props) => {
           name="taxPayerType"
           value={TaxPayerType.CONTRACTOR}
           checked={props.taxPayerType === TaxPayerType.CONTRACTOR}
-          onChange={(event) => props.setTaxPayerType(event.target.value)}
+          onChange={event => props.setTaxPayerType(event.target.value)}
         />
         OSVČ
       </label>
@@ -34,7 +35,7 @@ const AppForm = (props) => {
           name="taxPayerType"
           value={TaxPayerType.EMPLOYEE}
           checked={props.taxPayerType === TaxPayerType.EMPLOYEE}
-          onChange={(event) => props.setTaxPayerType(event.target.value)}
+          onChange={event => props.setTaxPayerType(event.target.value)}
         />
         Zaměstnanec
       </label>
@@ -43,12 +44,12 @@ const AppForm = (props) => {
 };
 
 AppForm.propTypes = {
-  income: React.PropTypes.number.isRequired,
-  expense: React.PropTypes.number.isRequired,
-  flatExpenseRate: React.PropTypes.number.isRequired,
-  setIncome: React.PropTypes.func.isRequired,
-  setExpense: React.PropTypes.func.isRequired,
-  setFlatExpenseRate: React.PropTypes.func.isRequired,
+  income: PropTypes.number.isRequired,
+  expense: PropTypes.number.isRequired,
+  flatExpenseRate: PropTypes.number.isRequired,
+  setIncome: PropTypes.func.isRequired,
+  setExpense: PropTypes.func.isRequired,
+  setFlatExpenseRate: PropTypes.func.isRequired,
 };
 
 

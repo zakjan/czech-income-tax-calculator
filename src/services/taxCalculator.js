@@ -31,7 +31,7 @@ const TaxCalculator = {
     return Math.floor(taxableIncome / 100) * 100;
   },
 
-  incomeTaxFromTaxableIncome: (taxableIncome) => {
+  incomeTaxFromTaxableIncome: taxableIncome => {
     const deductions = incomeTaxDeductionForPayer;
     const incomeTaxZone1 = Math.min(taxableIncome, incomeThresholdZone2) * incomeTaxRate;
     const incomeTaxZone2 = Math.max(taxableIncome - incomeThresholdZone2, 0) * incomeTaxRateZone2;
@@ -39,29 +39,29 @@ const TaxCalculator = {
     return Math.max(incomeTax - deductions, 0);
   },
 
-  socialInsuranceFromTaxableIncome: (taxableIncome) => {
+  socialInsuranceFromTaxableIncome: taxableIncome => {
     const socialInsuranceTaxableBase = Math.max(Math.min(taxableIncome / 2, maximalSocialInsuranceTaxableIncome), minimalSocialInsuranceTaxableIncome);
     return socialInsuranceTaxableBase * socialInsuranceRate;
   },
 
-  healthInsuranceFromTaxableIncome: (taxableIncome) => {
+  healthInsuranceFromTaxableIncome: taxableIncome => {
     const healthInsuranceTaxableBase = Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome);
     return healthInsuranceTaxableBase * healthInsuranceRate;
   },
 
-  employeeSocialInsuranceFromWage: (wage) => {
+  employeeSocialInsuranceFromWage: wage => {
     return wage * employeeSocialInsuranceRate;
   },
 
-  employeeHealthInsuranceFromWage: (wage) => {
+  employeeHealthInsuranceFromWage: wage => {
     return wage * employeeHealthInsuranceRate;
   },
 
-  employerSocialInsuranceFromWage: (wage) => {
+  employerSocialInsuranceFromWage: wage => {
     return wage * employerSocialInsuranceRate;
   },
 
-  employerHealthInsuranceFromWage: (wage) => {
+  employerHealthInsuranceFromWage: wage => {
     return wage * employerHealthInsuranceRate;
   },
 };

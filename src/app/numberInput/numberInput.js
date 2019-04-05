@@ -1,22 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './numberInput.less';
 
 
-const NumberInput = React.createClass({
+class NumberInput extends React.Component {
   onKeyPress(e) {
     const char = String.fromCharCode(e.which);
 
     if (char && !char.match(/\d/)) {
       e.preventDefault();
     }
-  },
+  }
 
   onChange(e) {
     const value = e.target.value;
     const parsedValue = parseFloat(value) || 0;
     this.props.onChange(parsedValue);
-  },
+  }
 
   render() {
     return (
@@ -28,12 +29,12 @@ const NumberInput = React.createClass({
         onChange={this.onChange}
       />
     );
-  },
-});
+  }
+}
 
 NumberInput.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 

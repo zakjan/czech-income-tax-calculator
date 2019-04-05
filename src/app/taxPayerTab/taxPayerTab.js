@@ -6,7 +6,7 @@ import EmployeeTab from './employee/tab.js';
 import TaxPayerType from 'models/taxPayerType.js';
 
 
-const TaxPayerTab = (props) => {
+const TaxPayerTab = props => {
   if (props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES) {
     return (<ContractorWithFlatExpensesTab {...props} />);
   }

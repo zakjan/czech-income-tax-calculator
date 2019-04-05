@@ -3,7 +3,7 @@ import React from 'react';
 import IncomeInput from 'app/incomeInput/incomeInput.js';
 
 
-const EmployeeForm = (props) => {
+const EmployeeForm = props => {
   return (
     <table>
       <tbody>

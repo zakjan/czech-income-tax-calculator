@@ -4,7 +4,7 @@ import ContractorForm from './form.js';
 import ContractorDiagram from './diagram.js';
 
 
-const ContractorTab = (props) => {
+const ContractorTab = props => {
   return (
     <div>
       <h2>OSVČ</h2>

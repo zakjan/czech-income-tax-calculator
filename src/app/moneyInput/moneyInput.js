@@ -1,23 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NumberInput from 'app/numberInput/numberInput.js';
 
 
-const MoneyInput = React.createClass({
-  render() {
-    return (
-      <span>
-        <NumberInput value={this.props.value} onChange={this.props.onChange} />
-        {' '}
-        Kč
-      </span>
-    );
-  },
-});
+const MoneyInput = props => {
+  return (
+    <span>
+      <NumberInput value={props.value} onChange={props.onChange} />
+      {' '}
+      Kč
+    </span>
+  );
+}
 
 MoneyInput.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 

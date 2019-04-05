@@ -4,7 +4,7 @@ import ContractorWithFlatExpensesForm from './form.js';
 import ContractorWithFlatExpensesDiagram from './diagram.js';
 
 
-const ContractorWithFlatExpensesTab = (props) => {
+const ContractorWithFlatExpensesTab = props => {
   return (
     <div>
       <h2>OSVČ s paušálními výdaji</h2>

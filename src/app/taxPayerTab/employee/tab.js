@@ -4,7 +4,7 @@ import EmployeeForm from './form.js';
 import EmployeeDiagram from './diagram.js';
 
 
-const EmployeeTab = (props) => {
+const EmployeeTab = props => {
   return (
     <div>
       <h2>Zaměstanec</h2>

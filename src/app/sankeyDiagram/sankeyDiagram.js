@@ -1,29 +1,27 @@
-import d3Sankey from 'd3-sankey';
-import * as d3Array from 'd3-array';
-import * as d3Collection from 'd3-collection';
-import * as d3Scale from 'd3-scale';
+import * as d3Sankey from 'd3-sankey';
 import * as d3Selection from 'd3-selection';
 import * as d3Format from 'd3-format';
 import d3FormatCsCzLocale from 'd3-format/locale/cs-CZ.json';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './sankeyDiagram.less';
 
 
-const SankeyDiagram = React.createClass({
-  clearDiagram() {
-    const el = this.refs.el;
+class SankeyDiagram extends React.Component {
+  constructor(props) {
+    super(props);
+    this.element = React.createRef();
+  }
 
-    while (el.firstChild) {
-      el.removeChild(el.firstChild);
+  clearDiagram() {
+    while (this.element.current.firstChild) {
+      this.element.current.removeChild(this.element.current.firstChild);
     }
-  },
+  }
 
   renderDiagram() {
     this.clearDiagram();
-
-    const nodes = this.props.nodes;
-    const links = this.props.links.map((x) => { x.value = Math.max(x.value, 0.1); return x; });
 
     const nodeWidth = 15;
     const nodePadding = 10;
@@ -37,9 +35,8 @@ const SankeyDiagram = React.createClass({
 
     d3Format.formatDefaultLocale(d3FormatCsCzLocale);
     const formatCurrency = d3Format.format('$,d');
-    const colorScale = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
 
-    const svg = d3Selection.select(this.refs.el).append('svg')
+    const svg = d3Selection.select(this.element.current).append('svg')
       .attr('class', 'sankey-diagram')
       .attr('width', width)
       .attr('height', height)
@@ -49,86 +46,66 @@ const SankeyDiagram = React.createClass({
     const sankey = d3Sankey.sankey()
       .size([diagramWidth, diagramHeight])
       .nodeWidth(nodeWidth)
-      .nodePadding(nodePadding)
-      .nodes(nodes)
-      .links(links)
-      .layout(0);
+      .nodePadding(nodePadding);
 
-    const totalValue = sankey.nodes()[0].value;
-
-    // spread nodes
-    // see https://github.com/q-m/d3.chart.sankey/blob/83fdab5/src/sankey.js#L209
-    const nodesByBreadth = d3Collection.nest()
-      .key(function(d) { return d.x; })
-      .entries(nodes)
-      .map(function(d) { return d.values; });
-    nodesByBreadth.forEach(function(nodes) {
-      var i,
-        node,
-        sum = d3Array.sum(nodes, function(o) { return o.dy; }),
-        padding = (height - sum - 10) / nodes.length,
-        y0 = 0;
-      nodes.sort(function(a, b) { return a.y - b.y; });
-      for (i = 0; i < nodes.length; ++i) {
-        node = nodes[i];
-        node.y = y0;
-        y0 += node.dy + padding;
-      }
+    const { nodes, links } = sankey({
+      nodes: this.props.nodes,
+      links: this.props.links.map(x => ({ ...x, value: Math.max(x.value, 0.1) })),
     });
 
-    const path = sankey.link();
+    const totalValue = nodes[0].value;
 
     const link = svg.append('g').selectAll('.link')
       .data(links)
-      .enter().append('path')
+      .join('path')
       .attr('class', 'link')
-      .attr('d', path)
-      .style('stroke-width', (d) => d.dy);
+      .attr('d', d3Sankey.sankeyLinkHorizontal())
+      .style('stroke-width', d => Math.max(1, d.width));
 
     const node = svg.append('g').selectAll('.node')
       .data(nodes)
-      .enter().append('g')
+      .join('g')
       .attr('class', 'node')
-      .attr('transform', (d) => `translate(${d.x}, ${d.y})`);
+      .attr('transform', d => `translate(${d.x0}, ${d.y0})`);
 
     node
       .append('rect')
       .attr('width', sankey.nodeWidth())
-      .attr('height', (d) => d.dy)
-      .style('fill', (d) => d.color || '#eeeeee');
+      .attr('height', d => d.y1 - d.y0)
+      .style('fill', d => d.color || '#eeeeee');
 
     node
-      .filter((d) => d.value > 0)
+      .filter(d => d.value > 0)
       .append('text')
       .attr('x', 6 + sankey.nodeWidth())
-      .attr('y', (d) => d.dy / 2)
-      .text((d) => d.name ? `${d.name}: ${formatCurrency(d.value)} (${Math.round(d.value / totalValue * 100)} %)` : '');
-  },
+      .attr('y', d => (d.y1 - d.y0) / 2)
+      .text(d => d.name ? `${d.name}: ${formatCurrency(d.value)} (${Math.round(d.value / totalValue * 100)} %)` : '');
+  }
 
   componentDidMount() {
     this.renderDiagram();
-  },
+  }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     this.renderDiagram();
-  },
+  }
 
   render() {
     return (
-      <div ref="el" />
+      <div ref={this.element} />
     );
-  },
-});
+  }
+}
 
 SankeyDiagram.propTypes = {
-  nodes: React.PropTypes.arrayOf(React.PropTypes.shape({
-    name: React.PropTypes.string,
-    color: React.PropTypes.string,
+  nodes: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    color: PropTypes.string,
   })).isRequired,
-  links: React.PropTypes.arrayOf(React.PropTypes.shape({
-    source: React.PropTypes.number.isRequired,
-    target: React.PropTypes.number.isRequired,
-    value: React.PropTypes.number.isRequired,
+  links: PropTypes.arrayOf(PropTypes.shape({
+    source: PropTypes.number.isRequired,
+    target: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
   })).isRequired,
 };
 

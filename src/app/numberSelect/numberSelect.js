@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
-const NumberSelect = React.createClass({
+class NumberSelect extends React.Component {
   onChange(e) {
     const value = e.target.value;
     const parsedValue = parseFloat(value) || 0;
     this.props.onChange(parsedValue);
-  },
+  }
 
   render() {
     return (
@@ -14,12 +15,12 @@ const NumberSelect = React.createClass({
         {this.props.children}
       </select>
     );
-  },
-});
+  }
+}
 
 NumberSelect.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 

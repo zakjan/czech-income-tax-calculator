@@ -7,7 +7,7 @@ import TaxCalculator from 'services/taxCalculator.js';
 import './app.less';
 
 
-const App = (props) => {
+const App = props => {
   return (
     <div className="app">
       <h1>Kalkulačka daně z příjmů za rok {TaxCalculator.getYear()}</h1>
