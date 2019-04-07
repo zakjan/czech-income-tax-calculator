@@ -11,7 +11,7 @@ class NumberSelect extends React.Component {
 
   render() {
     return (
-      <select value={this.props.value} onChange={this.onChange}>
+      <select value={this.props.value} onChange={this.onChange.bind(this)}>
         {this.props.children}
       </select>
     );

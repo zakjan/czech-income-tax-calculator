@@ -25,8 +25,8 @@ class NumberInput extends React.Component {
         className="number-input"
         type="text"
         value={this.props.value}
-        onKeyPress={this.onKeyPress}
-        onChange={this.onChange}
+        onKeyPress={this.onKeyPress.bind(this)}
+        onChange={this.onChange.bind(this)}
       />
     );
   }
