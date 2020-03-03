@@ -3,7 +3,7 @@ const incomeTaxRate = 0.15;
 const incomeTaxRateZone2 = 0.22;
 const incomeTaxDeductionForPayer = 24840;
 
-const socialInsuranceRate = 0.28;
+const socialInsuranceRate = 0.292;
 const employeeSocialInsuranceRate = 0.065;
 const employerSocialInsuranceRate = 0.25;
 const minimalSocialInsuranceTaxableIncome = 98100;
