@@ -27,14 +27,14 @@ const TaxCalculator = {
   },
 
   taxableIncomeFromIncomeAndExpense: (income, expense) => {
-    const taxableIncome = Math.max(income - expense, 0);
-    return Math.floor(taxableIncome / 100) * 100;
+    return Math.max(income - expense, 0);
   },
 
   incomeTaxFromTaxableIncome: taxableIncome => {
+    const roundedTaxableIncome = Math.floor(taxableIncome / 100) * 100;
     const deductions = incomeTaxDeductionForPayer;
-    const incomeTaxZone1 = Math.min(taxableIncome, incomeThresholdZone2) * incomeTaxRate;
-    const incomeTaxZone2 = Math.max(taxableIncome - incomeThresholdZone2, 0) * incomeTaxRateZone2;
+    const incomeTaxZone1 = Math.min(roundedTaxableIncome, incomeThresholdZone2) * incomeTaxRate;
+    const incomeTaxZone2 = Math.max(roundedTaxableIncome - incomeThresholdZone2, 0) * incomeTaxRateZone2;
     const incomeTax = incomeTaxZone1 + incomeTaxZone2;
     return Math.max(incomeTax - deductions, 0);
   },
