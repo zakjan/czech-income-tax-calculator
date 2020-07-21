@@ -16,9 +16,10 @@
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <%= htmlWebpackPlugin.tags.headTags %>
   </head>
   <body>
     <div id="app"></div>
+    <%= htmlWebpackPlugin.tags.bodyTags %>
   </body>
 </html>
