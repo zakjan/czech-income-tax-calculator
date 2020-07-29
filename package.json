@@ -13,7 +13,6 @@
     "d3-sankey": "^0.12.3",
     "d3-selection": "^1.4.1",
     "es6-promise": "^4.2.8",
-    "express": "^4.17.1",
     "immutable": "^3.8.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
