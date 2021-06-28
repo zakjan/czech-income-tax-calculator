@@ -8,12 +8,14 @@ import TaxCalculator from 'services/taxCalculator.js';
 const EmployeeDiagram = props => {
   const wage = props.income;
 
-  const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromWage(wage);
-  const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromWage(wage);
   const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromWage(wage);
   const employerHealthInsurance = TaxCalculator.employerHealthInsuranceFromWage(wage);
+  const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromWage(wage);
+  const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromWage(wage);
 
-  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(wage + employerSocialInsurance + employerHealthInsurance);
+  const taxableIncome = TaxCalculator.taxableIncomeFromWageAndEmployerInsurance(wage, employerSocialInsurance + employerHealthInsurance);
+
+  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
   const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [

@@ -1,25 +1,25 @@
 const maximalIncomeForFlatExpense = 2000000;
 const incomeTaxRate = 0.15;
 const incomeTaxRateZone2 = 0.22;
-const incomeTaxDeductionForPayer = 24840;
+const incomeTaxDeductionForPayer = 27840;
 
 const socialInsuranceRate = 0.292;
 const employeeSocialInsuranceRate = 0.065;
-const employerSocialInsuranceRate = 0.25;
-const minimalSocialInsuranceTaxableIncome = 104508; // minimální roční vyměřovací základ, https://www.cssz.cz/vyse-minimalnich-vymerovacich-zakladu-osvc
-const maximalSocialInsuranceTaxableIncome = 1672080; // maximální roční vyměřovací základ, https://www.cssz.cz/web/cz/osvc-duchodove-pojisteni-stanoveni-vyse-pojistneho
+const employerSocialInsuranceRate = 0.248;
+const minimalSocialInsuranceTaxableIncome = 106332; // minimální roční vyměřovací základ, https://www.cssz.cz/vyse-minimalnich-vymerovacich-zakladu-osvc
+const maximalSocialInsuranceTaxableIncome = 1701168; // maximální roční vyměřovací základ, https://www.cssz.cz/vypocet-pojistneho
 
 const healthInsuranceRate = 0.135;
 const employeeHealthInsuranceRate = 0.045;
 const employerHealthInsuranceRate = 0.09;
-const minimalHealthInsuranceTaxableIncome = 209010; // minimální roční vyměřovací základ, https://www.vzp.cz/platci/informace/osvc/vymerovaci-zaklad-a-vypocet-pojistneho/jaky-je-minimalni-vymerovaci-zaklad
+const minimalHealthInsuranceTaxableIncome = 212646; // minimální roční vyměřovací základ, https://www.vzp.cz/platci/informace/osvc/vymerovaci-zaklad-a-vypocet-pojistneho/jaky-je-minimalni-vymerovaci-zaklad
 
 const incomeThresholdZone2 = maximalSocialInsuranceTaxableIncome;
 
 
 const TaxCalculator = {
   getYear: () => {
-    return 2020;
+    return 2021;
   },
 
   expenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
@@ -47,6 +47,11 @@ const TaxCalculator = {
   healthInsuranceFromTaxableIncome: taxableIncome => {
     const healthInsuranceTaxableBase = Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome);
     return healthInsuranceTaxableBase * healthInsuranceRate;
+  },
+
+  taxableIncomeFromWageAndEmployerInsurance: (wage, employerInsurance) => {
+    // return wage + employerInsurance; // superhrubá mzda zrušena od 2021
+    return wage;
   },
 
   employeeSocialInsuranceFromWage: wage => {
