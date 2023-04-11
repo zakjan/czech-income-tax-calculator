@@ -5,7 +5,7 @@
   "author": "Jan Žák <zj@zakjan.cz>",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack -p --mode=production"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack -p --mode=production"
   },
   "dependencies": {
     "d3": "^5.16.0",
