@@ -25,7 +25,7 @@ class SankeyDiagram extends React.Component {
 
     const nodeWidth = 15;
     const nodePadding = 10;
-    const linkWidth = 250;
+    const linkWidth = 300;
     const columns = 4;
     const diagramWidth = (columns - 1) * linkWidth + columns * nodeWidth;
     const diagramHeight = diagramWidth / 4;
