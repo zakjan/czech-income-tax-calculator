@@ -27,7 +27,7 @@ class IncomeInput extends React.Component {
 
     return (
       <div className="income-input">
-        <p><MoneyInput value={income} onChange={this.props.onChange.bind(this)} /></p>
+        <p><MoneyInput value={income} onChange={this.props.onChange.bind(this)} /> / rok</p>
         <p><MoneyInput value={incomePerMonth} onChange={this.onChangeIncomePerMonth.bind(this)} /> / měsíc</p>
         <p><MoneyInput value={incomePerDay} onChange={this.onChangeIncomePerDay.bind(this)} /> / den</p>
         <p><MoneyInput value={incomePerHour} onChange={this.onChangeIncomePerHour.bind(this)} /> / hodina</p>
