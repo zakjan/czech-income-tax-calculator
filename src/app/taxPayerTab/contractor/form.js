@@ -14,7 +14,7 @@ const ContractorForm = props => {
         </tr>
         <tr>
           <td>Výdaje:</td>
-          <td><MoneyInput value={props.expense} onChange={props.setExpense} /></td>
+          <td><MoneyInput value={props.expense} onChange={props.setExpense} /> / rok</td>
         </tr>
       </tbody>
     </table>
