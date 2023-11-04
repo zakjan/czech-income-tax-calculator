@@ -11,22 +11,22 @@ const AppForm = props => {
         <input
           type="radio"
           name="taxPayerType"
-          value={TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
-          checked={props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
+          value={TaxPayerType.CONTRACTOR}
+          checked={props.taxPayerType === TaxPayerType.CONTRACTOR}
           onChange={event => props.setTaxPayerType(event.target.value)}
         />
-        OSVČ s paušálními výdaji
+        OSVČ
       </label>
       <br />
       <label>
         <input
           type="radio"
           name="taxPayerType"
-          value={TaxPayerType.CONTRACTOR}
-          checked={props.taxPayerType === TaxPayerType.CONTRACTOR}
+          value={TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
+          checked={props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
           onChange={event => props.setTaxPayerType(event.target.value)}
         />
-        OSVČ
+        OSVČ s paušálními výdaji
       </label>
       <br />
       <label>
