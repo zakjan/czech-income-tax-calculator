@@ -1,6 +1,6 @@
 # Czech Income Tax Calculator
 
-![image](https://github.com/inson1/czech-income-tax-calculator/assets/75314629/c87953d1-f67c-4984-a846-335624380dd7)
+![image](https://github.com/inson1/czech-income-tax-calculator/assets/75314629/8da69a74-db8f-48de-b55c-2a5273cdf141)
 
 ## Dependencies
 
