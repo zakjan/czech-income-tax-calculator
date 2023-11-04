@@ -19,7 +19,7 @@ const EmployeeDiagram = props => {
   const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [
-    { name: 'Superhrubá mzda', color: '#1f77b4' },
+    { name: 'Náklady zaměstnavatele', color: '#1f77b4' },
 
     { name: 'Sociální pojištění', color: '#ffbb78' },
     { name: 'Zdravotní pojištění', color: '#ffbb78' },
