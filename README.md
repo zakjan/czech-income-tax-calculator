@@ -1,5 +1,7 @@
 # Czech Income Tax Calculator
 
+![image](./docs/mainScreenshot.png)
+
 ## Dependencies
 
 - Node.js >= 10
