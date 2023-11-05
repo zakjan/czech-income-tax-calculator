@@ -1,6 +1,6 @@
 const maximalIncomeForFlatExpense = 2000000;
 const incomeTaxRate = 0.15;
-const incomeTaxRateZone2 = 0.22;
+const incomeTaxRateZone2 = 0.23;
 const incomeTaxDeductionForPayer = 30840;
 
 const socialInsuranceRate = 0.292;
