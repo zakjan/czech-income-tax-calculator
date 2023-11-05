@@ -11,6 +11,17 @@ const AppForm = props => {
         <input
           type="radio"
           name="taxPayerType"
+          value={TaxPayerType.EMPLOYEE}
+          checked={props.taxPayerType === TaxPayerType.EMPLOYEE}
+          onChange={event => props.setTaxPayerType(event.target.value)}
+        />
+        Zaměstnanec
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          name="taxPayerType"
           value={TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
           checked={props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
           onChange={event => props.setTaxPayerType(event.target.value)}
@@ -27,17 +38,6 @@ const AppForm = props => {
           onChange={event => props.setTaxPayerType(event.target.value)}
         />
         OSVČ
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          name="taxPayerType"
-          value={TaxPayerType.EMPLOYEE}
-          checked={props.taxPayerType === TaxPayerType.EMPLOYEE}
-          onChange={event => props.setTaxPayerType(event.target.value)}
-        />
-        Zaměstnanec
       </label>
     </p>
   );
