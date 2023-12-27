@@ -71,7 +71,8 @@ class SankeyDiagram extends React.Component {
     node
       .append('rect')
       .attr('width', sankey.nodeWidth())
-      .attr('height', d => d.y1 - d.y0)
+      .attr('height', d => Math.max(1, d.y1 - d.y0))
+      .attr('transform', d => d.y1 - d.y0 < 0.5 ? 'translate(0, -0.5)' : '')
       .style('fill', d => d.color || '#eeeeee');
 
     node
