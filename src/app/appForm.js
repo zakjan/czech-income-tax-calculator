@@ -99,10 +99,11 @@ AppForm.propTypes = {
   benefit: PropTypes.number.isRequired,
   expense: PropTypes.number.isRequired,
   flatExpenseRate: PropTypes.number.isRequired,
+  sicknessInsurance: PropTypes.bool.isRequired,
   setIncome: PropTypes.func.isRequired,
   setBenefit: PropTypes.func.isRequired,
   setExpense: PropTypes.func.isRequired,
-  setFlatExpenseRate: PropTypes.func.isRequired,
+  setSicknessInsurance: PropTypes.func.isRequired,
 };
 
 

@@ -20,8 +20,9 @@ const ContractorWithFlatExpensesDiagram = props => {
 
   const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
   const socialInsurance = TaxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);
+  const sicknessInsurance = props.sicknessInsurance ? TaxCalculator.sicknessInsuranceFromTaxableIncome(taxableIncome) : 0;
   const healthInsurance = TaxCalculator.healthInsuranceFromTaxableIncome(taxableIncome);
-  const taxedIncome = taxableIncome - incomeTax - socialInsurance - healthInsurance;
+  const taxedIncome = taxableIncome - incomeTax - socialInsurance - sicknessInsurance - healthInsurance;
 
   const nodes = [
     { id: 0, name: 'Příjmy', color: '#1f77b4' },
@@ -34,12 +35,13 @@ const ContractorWithFlatExpensesDiagram = props => {
     { id: 5 },
     { id: 6, name: 'Daň z příjmu', color: '#ffbb78' },
     { id: 7, name: 'Sociální pojištění', color: '#ffbb78' },
-    { id: 8, name: 'Zdravotní pojištění', color: '#ffbb78' },
-    { id: 9 },
+    { id: 8, name: 'Nemocenské pojištění', color: '#ffbb78' },
+    { id: 9, name: 'Zdravotní pojištění', color: '#ffbb78' },
+    { id: 10 },
 
-    { id: 10, name: 'Výdaje', color: '#d62728' },
-    { id: 11, name: 'Daně', color: '#d62728' },
-    { id: 12, name: 'Příjmy po zdanění', color: '#2ca02c' },
+    { id: 11, name: 'Výdaje', color: '#d62728' },
+    { id: 12, name: 'Daně', color: '#d62728' },
+    { id: 13, name: 'Příjmy po zdanění', color: '#2ca02c' },
   ];
   const links = [
     { source: 0, target: 1, value: expense / periodFactor },
@@ -50,15 +52,17 @@ const ContractorWithFlatExpensesDiagram = props => {
     { source: 2, target: 5, value: effectiveFlatExpense / periodFactor },
     { source: 3, target: 6, value: incomeTax / periodFactor },
     { source: 3, target: 7, value: socialInsurance / periodFactor },
-    { source: 3, target: 8, value: healthInsurance / periodFactor },
-    { source: 3, target: 9, value: taxedIncome / periodFactor },
+    { source: 3, target: 8, value: sicknessInsurance / periodFactor },
+    { source: 3, target: 9, value: healthInsurance / periodFactor },
+    { source: 3, target: 10, value: taxedIncome / periodFactor },
 
-    { source: 4, target: 10, value: expense / periodFactor },
-    { source: 5, target: 12, value: effectiveFlatExpense / periodFactor },
-    { source: 6, target: 11, value: incomeTax / periodFactor },
-    { source: 7, target: 11, value: socialInsurance / periodFactor },
-    { source: 8, target: 11, value: healthInsurance / periodFactor },
-    { source: 9, target: 12, value: taxedIncome / periodFactor },
+    { source: 4, target: 11, value: expense / periodFactor },
+    { source: 5, target: 13, value: effectiveFlatExpense / periodFactor },
+    { source: 6, target: 12, value: incomeTax / periodFactor },
+    { source: 7, target: 12, value: socialInsurance / periodFactor },
+    { source: 8, target: 12, value: sicknessInsurance / periodFactor },
+    { source: 9, target: 12, value: healthInsurance / periodFactor },
+    { source: 10, target: 13, value: taxedIncome / periodFactor },
   ];
 
   return (

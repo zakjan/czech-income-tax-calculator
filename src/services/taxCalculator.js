@@ -9,6 +9,11 @@ const employerSocialInsuranceRate = 0.248;
 const minimalSocialInsuranceTaxableIncome = 120972; // minimální roční vyměřovací základ, https://www.cssz.cz/vyse-minimalnich-vymerovacich-zakladu-osvc
 const maximalSocialInsuranceTaxableIncome = 1935552; // maximální roční vyměřovací základ, https://www.mpsv.cz/socialni-pojisteni
 
+const sicknessInsuranceRate = 0.021;
+const employeeSicknessInsuranceRate = 0.006;
+const employerSicknessInsuranceRate = 0.021;
+const minimalSicknessInsuranceTaxableIncome = 8000 * 12; // minimální roční vyměřovací základ, https://www.cssz.cz/web/cz/vyse-a-vypocet-davek
+
 const healthInsuranceRate = 0.135;
 const employeeHealthInsuranceRate = 0.045;
 const employerHealthInsuranceRate = 0.09;
@@ -44,6 +49,11 @@ const TaxCalculator = {
     return socialInsuranceTaxableBase * socialInsuranceRate;
   },
 
+  sicknessInsuranceFromTaxableIncome: taxableIncome => {
+    const sicknessInsuranceTaxableBase = Math.max(taxableIncome / 2, minimalSicknessInsuranceTaxableIncome);
+    return sicknessInsuranceTaxableBase * sicknessInsuranceRate;
+  },
+
   healthInsuranceFromTaxableIncome: taxableIncome => {
     const healthInsuranceTaxableBase = Math.max(taxableIncome / 2, minimalHealthInsuranceTaxableIncome);
     return healthInsuranceTaxableBase * healthInsuranceRate;
@@ -58,12 +68,20 @@ const TaxCalculator = {
     return wage * employeeSocialInsuranceRate;
   },
 
+  employeeSicknessInsuranceFromWage: wage => {
+    return wage * employeeSicknessInsuranceRate;
+  },
+
   employeeHealthInsuranceFromWage: wage => {
     return wage * employeeHealthInsuranceRate;
   },
 
   employerSocialInsuranceFromWage: wage => {
     return wage * employerSocialInsuranceRate;
+  },
+
+  employerSicknessInsuranceFromWage: wage => {
+    return wage * employerSicknessInsuranceRate;
   },
 
   employerHealthInsuranceFromWage: wage => {

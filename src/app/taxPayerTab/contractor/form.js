@@ -15,6 +15,18 @@ const ContractorForm = props => {
           <td>Výdaje:</td>
           <td><MoneyInput period={props.period} value={props.expense} onChange={props.setExpense} /></td>
         </tr>
+        <tr>
+          <td colSpan="2">
+            <label>
+              <input
+                type="checkbox"
+                checked={props.sicknessInsurance}
+                onChange={event => props.setSicknessInsurance(event.target.checked)}
+              />
+              Nemocenské pojištění
+            </label>
+          </td>
+        </tr>
       </tbody>
     </table>
   );
