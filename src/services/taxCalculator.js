@@ -9,7 +9,7 @@ const employerSocialInsuranceRate = 0.248;
 const minimalSocialInsuranceTaxableIncome = 13191 * 12; // minimální roční vyměřovací základ, https://www.cssz.cz/vyse-minimalnich-vymerovacich-zakladu-osvc
 const maximalSocialInsuranceTaxableIncome = 2110416; // maximální roční vyměřovací základ, https://www.mpsv.cz/socialni-pojisteni
 
-const sicknessInsuranceRate = 0.021;
+const sicknessInsuranceRate = 0.027;
 const employeeSicknessInsuranceRate = 0.006;
 const employerSicknessInsuranceRate = 0.021;
 const minimalSicknessInsuranceTaxableIncome = 8000 * 12; // minimální roční vyměřovací základ, https://www.cssz.cz/web/cz/vyse-a-vypocet-davek
@@ -19,7 +19,7 @@ const employeeHealthInsuranceRate = 0.045;
 const employerHealthInsuranceRate = 0.09;
 const minimalHealthInsuranceTaxableIncome = 21983.50 * 12; // minimální roční vyměřovací základ, https://www.vzp.cz/platci/informace/osvc/vymerovaci-zaklad-a-vypocet-pojistneho/jaky-je-minimalni-vymerovaci-zaklad
 
-const incomeThresholdZone2 = maximalSocialInsuranceTaxableIncome;
+const incomeThresholdZone2 = 131901 * 12; // https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/prehledne-ktere-zmeny-prinese-rok-2024-nejen-pro-o-54178
 
 
 const TaxCalculator = {
