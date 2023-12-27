@@ -11,6 +11,10 @@ const EmployeeForm = props => {
           <td>Hrubá mzda:</td>
           <td><MoneyInput period={props.period} value={props.income} onChange={props.setIncome} /></td>
         </tr>
+        <tr>
+          <td>Benefity:</td>
+          <td><MoneyInput period={props.period} value={props.benefit} onChange={props.setBenefit} /></td>
+        </tr>
       </tbody>
     </table>
   );

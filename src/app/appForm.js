@@ -96,9 +96,11 @@ const AppForm = props => {
 
 AppForm.propTypes = {
   income: PropTypes.number.isRequired,
+  benefit: PropTypes.number.isRequired,
   expense: PropTypes.number.isRequired,
   flatExpenseRate: PropTypes.number.isRequired,
   setIncome: PropTypes.func.isRequired,
+  setBenefit: PropTypes.func.isRequired,
   setExpense: PropTypes.func.isRequired,
   setFlatExpenseRate: PropTypes.func.isRequired,
 };
