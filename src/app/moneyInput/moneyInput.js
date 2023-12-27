@@ -12,7 +12,7 @@ class MoneyInput extends React.Component {
   }
 
   render() {
-    const value = Math.floor(this.props.value / PeriodFactor[this.props.period]);
+    const value = Math.round(this.props.value / PeriodFactor[this.props.period]);
 
     return (
       <span>

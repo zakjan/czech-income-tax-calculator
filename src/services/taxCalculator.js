@@ -6,8 +6,8 @@ const incomeTaxDeductionForPayer = 30840;
 const socialInsuranceRate = 0.292;
 const employeeSocialInsuranceRate = 0.065;
 const employerSocialInsuranceRate = 0.248;
-const minimalSocialInsuranceTaxableIncome = 120972; // minimální roční vyměřovací základ, https://www.cssz.cz/vyse-minimalnich-vymerovacich-zakladu-osvc
-const maximalSocialInsuranceTaxableIncome = 1935552; // maximální roční vyměřovací základ, https://www.mpsv.cz/socialni-pojisteni
+const minimalSocialInsuranceTaxableIncome = 13191 * 12; // minimální roční vyměřovací základ, https://www.cssz.cz/vyse-minimalnich-vymerovacich-zakladu-osvc
+const maximalSocialInsuranceTaxableIncome = 2110416; // maximální roční vyměřovací základ, https://www.mpsv.cz/socialni-pojisteni
 
 const sicknessInsuranceRate = 0.021;
 const employeeSicknessInsuranceRate = 0.006;
@@ -17,14 +17,14 @@ const minimalSicknessInsuranceTaxableIncome = 8000 * 12; // minimální roční 
 const healthInsuranceRate = 0.135;
 const employeeHealthInsuranceRate = 0.045;
 const employerHealthInsuranceRate = 0.09;
-const minimalHealthInsuranceTaxableIncome = 20162 * 12; // minimální roční vyměřovací základ, https://www.vzp.cz/platci/informace/osvc/vymerovaci-zaklad-a-vypocet-pojistneho/jaky-je-minimalni-vymerovaci-zaklad
+const minimalHealthInsuranceTaxableIncome = 21983.50 * 12; // minimální roční vyměřovací základ, https://www.vzp.cz/platci/informace/osvc/vymerovaci-zaklad-a-vypocet-pojistneho/jaky-je-minimalni-vymerovaci-zaklad
 
 const incomeThresholdZone2 = maximalSocialInsuranceTaxableIncome;
 
 
 const TaxCalculator = {
   getYear: () => {
-    return 2023;
+    return 2024;
   },
 
   flatExpenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
