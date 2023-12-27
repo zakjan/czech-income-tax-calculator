@@ -4,7 +4,7 @@
   "description": "Czech Income Tax Calculator",
   "author": "Jan Žák <zj@zakjan.cz>",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server",
     "build": "NODE_OPTIONS=--openssl-legacy-provider webpack -p --mode=production"
   },
   "dependencies": {
