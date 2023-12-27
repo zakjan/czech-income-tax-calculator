@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 import SankeyDiagram from 'app/sankeyDiagram/sankeyDiagram.js';
 import TaxCalculator from 'services/taxCalculator.js';
+import PeriodFactor from 'models/periodFactor.js';
 
 
 const ContractorWithFlatExpensesDiagram = props => {
+  const periodFactor = PeriodFactor[props.period];
+
   const income = props.income;
   const expense = props.expense;
   const flatExpenseRate = props.flatExpenseRate;
@@ -39,23 +42,23 @@ const ContractorWithFlatExpensesDiagram = props => {
     { id: 12, name: 'Příjmy po zdanění', color: '#2ca02c' },
   ];
   const links = [
-    { source: 0, target: 1, value: expense },
-    { source: 0, target: 2, value: effectiveFlatExpense },
-    { source: 0, target: 3, value: taxableIncome },
+    { source: 0, target: 1, value: expense / periodFactor },
+    { source: 0, target: 2, value: effectiveFlatExpense / periodFactor },
+    { source: 0, target: 3, value: taxableIncome / periodFactor },
 
-    { source: 1, target: 4, value: expense },
-    { source: 2, target: 5, value: effectiveFlatExpense },
-    { source: 3, target: 6, value: incomeTax },
-    { source: 3, target: 7, value: socialInsurance },
-    { source: 3, target: 8, value: healthInsurance },
-    { source: 3, target: 9, value: taxedIncome },
+    { source: 1, target: 4, value: expense / periodFactor },
+    { source: 2, target: 5, value: effectiveFlatExpense / periodFactor },
+    { source: 3, target: 6, value: incomeTax / periodFactor },
+    { source: 3, target: 7, value: socialInsurance / periodFactor },
+    { source: 3, target: 8, value: healthInsurance / periodFactor },
+    { source: 3, target: 9, value: taxedIncome / periodFactor },
 
-    { source: 4, target: 10, value: expense },
-    { source: 5, target: 12, value: effectiveFlatExpense },
-    { source: 6, target: 11, value: incomeTax },
-    { source: 7, target: 11, value: socialInsurance },
-    { source: 8, target: 11, value: healthInsurance },
-    { source: 9, target: 12, value: taxedIncome },
+    { source: 4, target: 10, value: expense / periodFactor },
+    { source: 5, target: 12, value: effectiveFlatExpense / periodFactor },
+    { source: 6, target: 11, value: incomeTax / periodFactor },
+    { source: 7, target: 11, value: socialInsurance / periodFactor },
+    { source: 8, target: 11, value: healthInsurance / periodFactor },
+    { source: 9, target: 12, value: taxedIncome / periodFactor },
   ];
 
   return (

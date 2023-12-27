@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IncomeInput from 'app/incomeInput/incomeInput.js';
+import MoneyInput from 'app/moneyInput/moneyInput.js';
 
 
 const EmployeeForm = props => {
@@ -9,7 +9,7 @@ const EmployeeForm = props => {
       <tbody>
         <tr>
           <td>Hrubá mzda:</td>
-          <td><IncomeInput value={props.income} onChange={props.setIncome} /></td>
+          <td><MoneyInput period={props.period} value={props.income} onChange={props.setIncome} /></td>
         </tr>
       </tbody>
     </table>

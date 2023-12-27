@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 import SankeyDiagram from 'app/sankeyDiagram/sankeyDiagram.js';
 import TaxCalculator from 'services/taxCalculator.js';
+import PeriodFactor from 'models/periodFactor.js';
 
 
 const EmployeeDiagram = props => {
+  const periodFactor = PeriodFactor[props.period];
+
   const wage = props.income;
 
   const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromWage(wage);
@@ -36,23 +39,23 @@ const EmployeeDiagram = props => {
     { id: 11, name: 'Čistá mzda', color: '#2ca02c' },
   ];
   const links = [
-    { source: 0, target: 1, value: employerSocialInsurance },
-    { source: 0, target: 2, value: employerHealthInsurance },
-    { source: 0, target: 3, value: wage },
+    { source: 0, target: 1, value: employerSocialInsurance / periodFactor },
+    { source: 0, target: 2, value: employerHealthInsurance / periodFactor },
+    { source: 0, target: 3, value: wage / periodFactor },
 
-    { source: 1, target: 4, value: employerSocialInsurance },
-    { source: 2, target: 5, value: employerHealthInsurance },
-    { source: 3, target: 6, value: incomeTax },
-    { source: 3, target: 7, value: employeeSocialInsurance },
-    { source: 3, target: 8, value: employeeHealthInsurance },
-    { source: 3, target: 9, value: taxedIncome },
+    { source: 1, target: 4, value: employerSocialInsurance / periodFactor },
+    { source: 2, target: 5, value: employerHealthInsurance / periodFactor },
+    { source: 3, target: 6, value: incomeTax / periodFactor },
+    { source: 3, target: 7, value: employeeSocialInsurance / periodFactor },
+    { source: 3, target: 8, value: employeeHealthInsurance / periodFactor },
+    { source: 3, target: 9, value: taxedIncome / periodFactor },
 
-    { source: 4, target: 10, value: employerSocialInsurance },
-    { source: 5, target: 10, value: employerHealthInsurance },
-    { source: 6, target: 10, value: incomeTax },
-    { source: 7, target: 10, value: employeeSocialInsurance },
-    { source: 8, target: 10, value: employeeHealthInsurance },
-    { source: 9, target: 11, value: taxedIncome },
+    { source: 4, target: 10, value: employerSocialInsurance / periodFactor },
+    { source: 5, target: 10, value: employerHealthInsurance / periodFactor },
+    { source: 6, target: 10, value: incomeTax / periodFactor },
+    { source: 7, target: 10, value: employeeSocialInsurance / periodFactor },
+    { source: 8, target: 10, value: employeeHealthInsurance / periodFactor },
+    { source: 9, target: 11, value: taxedIncome / periodFactor },
   ];
 
   return (

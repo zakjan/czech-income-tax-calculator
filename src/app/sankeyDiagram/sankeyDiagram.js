@@ -79,7 +79,7 @@ class SankeyDiagram extends React.Component {
       .append('text')
       .attr('x', 6 + sankey.nodeWidth())
       .attr('y', d => (d.y1 - d.y0) / 2)
-      .text(d => d.name ? `${d.name}: ${formatCurrency(d.value)} (${Math.round(d.value / totalValue * 100)} %)` : '');
+      .text(d => d.name ? `${d.name}: ${formatCurrency(Math.floor(d.value))} (${Math.round(d.value / totalValue * 100)} %)` : '');
   }
 
   componentDidMount() {
