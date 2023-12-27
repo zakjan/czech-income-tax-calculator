@@ -19,21 +19,21 @@ const EmployeeDiagram = props => {
   const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [
-    { name: 'Náklady zaměstnavatele', color: '#1f77b4' },
+    { id: 0, name: 'Náklady zaměstnavatele', color: '#1f77b4' },
 
-    { name: 'Sociální pojištění', color: '#ffbb78' },
-    { name: 'Zdravotní pojištění', color: '#ffbb78' },
-    { name: 'Hrubá mzda', color: '#aec7e8' },
+    { id: 1, name: 'Sociální pojištění zaměstnavatele', color: '#ffbb78' },
+    { id: 2, name: 'Zdravotní pojištění zaměstnavatele', color: '#ffbb78' },
+    { id: 3, name: 'Hrubá mzda', color: '#aec7e8' },
 
-    {},
-    {},
-    { name: 'Daň z příjmu', color: '#ffbb78' },
-    { name: 'Sociální pojištění', color: '#ffbb78' },
-    { name: 'Zdravotní pojištění', color: '#ffbb78' },
-    {},
+    { id: 4 },
+    { id: 5 },
+    { id: 6, name: 'Daň z příjmu', color: '#ffbb78' },
+    { id: 7, name: 'Sociální pojištění zaměstnance', color: '#ffbb78' },
+    { id: 8, name: 'Zdravotní pojištění zaměstnance', color: '#ffbb78' },
+    { id: 9 },
 
-    { name: 'Daně', color: '#d62728' },
-    { name: 'Čistá mzda', color: '#2ca02c' },
+    { id: 10, name: 'Daně', color: '#d62728' },
+    { id: 11, name: 'Čistá mzda', color: '#2ca02c' },
   ];
   const links = [
     { source: 0, target: 1, value: employerSocialInsurance },

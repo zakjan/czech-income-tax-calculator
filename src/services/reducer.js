@@ -9,7 +9,7 @@ const savedState = JSON.parse(window.localStorage.getItem('state') || '{}');
 const initialState = Immutable.Map({
   taxPayerType: savedState.taxPayerType || TaxPayerType.EMPLOYEE,
   income: savedState.income || 480000,
-  expense: savedState.expense || 300000,
+  expense: savedState.expense || 0,
   flatExpenseRate: savedState.flatExpenseRate || 0.6,
 });
 

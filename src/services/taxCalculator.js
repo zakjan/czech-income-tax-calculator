@@ -22,7 +22,7 @@ const TaxCalculator = {
     return 2023;
   },
 
-  expenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
+  flatExpenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
     return Math.min(income, maximalIncomeForFlatExpense) * flatExpenseRate;
   },
 

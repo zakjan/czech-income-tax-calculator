@@ -1,6 +1,7 @@
 import React from 'react';
 
 import IncomeInput from 'app/incomeInput/incomeInput.js';
+import MoneyInput from 'app/moneyInput/moneyInput.js';
 import NumberSelect from 'app/numberSelect/numberSelect.js';
 
 
@@ -14,6 +15,10 @@ const ContractorWithFlatExpensesForm = props => {
         </tr>
         <tr>
           <td>Výdaje:</td>
+          <td><MoneyInput value={props.expense} onChange={props.setExpense} /> / rok</td>
+        </tr>
+        <tr>
+          <td>Výdajový paušál:</td>
           <td>
             <NumberSelect value={props.flatExpenseRate} onChange={props.setFlatExpenseRate}>
               <option value="0.4">40%</option>

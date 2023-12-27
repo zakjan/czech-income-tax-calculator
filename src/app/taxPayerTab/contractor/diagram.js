@@ -14,23 +14,23 @@ const ContractorDiagram = props => {
   const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
   const socialInsurance = TaxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);
   const healthInsurance = TaxCalculator.healthInsuranceFromTaxableIncome(taxableIncome);
-  const taxedProfit = taxableIncome - incomeTax - socialInsurance - healthInsurance;
+  const taxedIncome = taxableIncome - incomeTax - socialInsurance - healthInsurance;
 
   const nodes = [
-    { name: 'Příjmy', color: '#1f77b4' },
+    { id: 0, name: 'Příjmy', color: '#1f77b4' },
 
-    {},
-    { name: 'Zdanitelný základ', color: '#aec7e8' },
+    { id: 1 },
+    { id: 2, name: 'Zdanitelný základ', color: '#aec7e8' },
 
-    {},
-    { name: 'Daň z příjmu', color: '#ffbb78' },
-    { name: 'Sociální pojištění', color: '#ffbb78' },
-    { name: 'Zdravotní pojištění', color: '#ffbb78' },
-    {},
+    { id: 3 },
+    { id: 4, name: 'Daň z příjmu', color: '#ffbb78' },
+    { id: 5, name: 'Sociální pojištění', color: '#ffbb78' },
+    { id: 6, name: 'Zdravotní pojištění', color: '#ffbb78' },
+    { id: 7 },
 
-    { name: 'Výdaje', color: '#ff7f0e' },
-    { name: 'Daně', color: '#d62728' },
-    { name: 'Zisk po zdanění', color: '#2ca02c' },
+    { id: 8, name: 'Výdaje', color: '#d62728' },
+    { id: 9, name: 'Daně', color: '#d62728' },
+    { id: 10, name: 'Příjmy po zdanění', color: '#2ca02c' },
   ];
   const links = [
     { source: 0, target: 1, value: expense },
@@ -40,13 +40,13 @@ const ContractorDiagram = props => {
     { source: 2, target: 4, value: incomeTax },
     { source: 2, target: 5, value: socialInsurance },
     { source: 2, target: 6, value: healthInsurance },
-    { source: 2, target: 7, value: taxedProfit },
+    { source: 2, target: 7, value: taxedIncome },
 
     { source: 3, target: 8, value: expense },
     { source: 4, target: 9, value: incomeTax },
     { source: 5, target: 9, value: socialInsurance },
     { source: 6, target: 9, value: healthInsurance },
-    { source: 7, target: 10, value: taxedProfit },
+    { source: 7, target: 10, value: taxedIncome },
   ];
 
   return (
