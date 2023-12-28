@@ -22,7 +22,7 @@ const EmployeeDiagram = props => {
   const taxableIncome = TaxCalculator.taxableIncomeFromWageAndEmployerInsurance(wage, employerSocialInsurance + employerHealthInsurance);
 
   const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
-  const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
+  const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeSicknessInsurance - employeeHealthInsurance;
 
   const nodes = [
     { id: 0, name: 'Náklady zaměstnavatele', color: '#1f77b4' },
