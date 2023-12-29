@@ -31,17 +31,6 @@ const AppForm = props => {
           />
           OSVČ
         </label>
-        <br />
-        <label>
-          <input
-            type="radio"
-            name="taxPayerType"
-            value={TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
-            checked={props.taxPayerType === TaxPayerType.CONTRACTOR_WITH_FLAT_EXPENSES}
-            onChange={event => props.setTaxPayerType(event.target.value)}
-          />
-          OSVČ s paušálními výdaji
-        </label>
       </p>
 
       <h3>Částky za období</h3>

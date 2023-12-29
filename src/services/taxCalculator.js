@@ -27,8 +27,8 @@ const TaxCalculator = {
     return 2024;
   },
 
-  taxableExpenseFromIncomeAndFlatExpenseRate: (income, flatExpenseRate) => {
-    return Math.min(income, maximalIncomeForFlatExpense) * flatExpenseRate;
+  taxableExpenseFromIncomeAndFlatExpenseRate: (income, expense, flatExpenseRate) => {
+    return Math.max(expense, Math.min(income, maximalIncomeForFlatExpense) * flatExpenseRate);
   },
 
   taxableIncomeFromIncomeAndExpense: (income, expense) => {

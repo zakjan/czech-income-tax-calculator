@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MoneyInput from 'app/moneyInput/moneyInput.js';
+import NumberSelect from 'app/numberSelect/numberSelect.js';
 
 
 const ContractorForm = props => {
@@ -14,6 +15,17 @@ const ContractorForm = props => {
         <tr>
           <td>Výdaje:</td>
           <td><MoneyInput period={props.period} value={props.expense} onChange={props.setExpense} /></td>
+        </tr>
+        <tr>
+          <td>Výdajový paušál:</td>
+          <td>
+            <NumberSelect value={props.flatExpenseRate} onChange={props.setFlatExpenseRate}>
+              <option value="0">ne</option>
+              <option value="0.4">40%</option>
+              <option value="0.6">60%</option>
+              <option value="0.8">80%</option>
+            </NumberSelect>
+          </td>
         </tr>
         <tr>
           <td colSpan="2">

@@ -1,7 +1,6 @@
 const TaxPayerType = {
   EMPLOYEE: "EMPLOYEE",
   CONTRACTOR: "CONTRACTOR",
-  CONTRACTOR_WITH_FLAT_EXPENSES: "CONTRACTOR_WITH_FLAT_EXPENSES",
 };
 
 export default TaxPayerType;
