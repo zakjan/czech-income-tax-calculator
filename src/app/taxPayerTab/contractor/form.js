@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import MoneyInput from 'app/moneyInput/moneyInput.js';
 import NumberSelect from 'app/numberSelect/numberSelect.js';
+import NumberInput from 'app/numberInput/numberInput.js';
 
 
 const ContractorForm = props => {
@@ -40,6 +41,10 @@ const ContractorForm = props => {
             </label>
           </td>
         </tr>
+        <tr>
+          <td>Neplacené volno:</td>
+          <td><NumberInput value={props.unpaidDays} onChange={props.setUnpaidDays} /> dnů / rok</td>
+        </tr>
       </tbody>
     </table>
   );
@@ -49,9 +54,11 @@ ContractorForm.propTypes = {
   grossIncome: PropTypes.number.isRequired,
   expense: PropTypes.number.isRequired,
   sicknessInsuranceEnabled: PropTypes.bool.isRequired,
+  unpaidDays: PropTypes.number.isRequired,
   setGrossIncome: PropTypes.func.isRequired,
   setExpense: PropTypes.func.isRequired,
   setSicknessInsuranceEnabled: PropTypes.func.isRequired,
+  setUnpaidDays: PropTypes.func.isRequired,
 };
 
 

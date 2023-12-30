@@ -11,6 +11,7 @@ const actions = {
   setExpense: createAction(actionTypes.SET_EXPENSE),
   setFlatExpenseRate: createAction(actionTypes.SET_FLAT_EXPENSE_RATE),
   setSicknessInsuranceEnabled: createAction(actionTypes.SET_SICKNESS_INSURANCE_ENABLED),
+  setUnpaidDays: createAction(actionTypes.SET_UNPAID_DAYS),
 };
 
 

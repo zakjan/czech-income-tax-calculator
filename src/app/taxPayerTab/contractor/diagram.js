@@ -8,11 +8,11 @@ import PeriodFactor from 'models/periodFactor.js';
 
 const ContractorDiagram = props => {
   const periodFactor = PeriodFactor[props.period];
-  const grossIncome = props.grossIncome;
-  const expense = props.expense;
+  const grossIncome = TaxCalculator.contractorAmountWithoutUnpaidDays(props.grossIncome, props.unpaidDays);
+  const expense = TaxCalculator.contractorAmountWithoutUnpaidDays(props.expense, props.unpaidDays);
   const flatExpenseRate = props.flatExpenseRate;
   const sicknessInsuranceEnabled = props.sicknessInsuranceEnabled;
-
+  
   const applicableExpense = TaxCalculator.contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(grossIncome, expense, flatExpenseRate);
   const virtualExpense = applicableExpense - expense;
 

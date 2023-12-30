@@ -1,3 +1,6 @@
+import Period from '../models/period.js';
+import PeriodFactor from '../models/periodFactor.js';
+
 const incomeTaxRate = 0.15;
 const incomeTaxRateZone2 = 0.23;
 const incomeTaxDeductionForPayer = 30840;
@@ -22,6 +25,10 @@ const employeeHealthInsuranceRate = 0.045;
 const TaxCalculator = {
   getYear: () => {
     return 2024;
+  },
+
+  contractorAmountWithoutUnpaidDays: (amount, unpaidDays) => {
+    return Math.max(amount * ((PeriodFactor[Period.DAY] - unpaidDays) / PeriodFactor[Period.DAY]), 0);
   },
 
   contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate: (grossIncome, expense, flatExpenseRate) => {
