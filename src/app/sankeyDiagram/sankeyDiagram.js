@@ -44,6 +44,7 @@ class SankeyDiagram extends React.Component {
       .attr('transform', `translate(${padding}, ${padding})`);
 
     const sankey = d3Sankey.sankey()
+      .nodeId(d => d.id)
       .size([diagramWidth, diagramHeight])
       .nodeWidth(nodeWidth)
       .nodePadding(nodePadding);
@@ -100,12 +101,13 @@ class SankeyDiagram extends React.Component {
 
 SankeyDiagram.propTypes = {
   nodes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     color: PropTypes.string,
   })).isRequired,
   links: PropTypes.arrayOf(PropTypes.shape({
-    source: PropTypes.number.isRequired,
-    target: PropTypes.number.isRequired,
+    source: PropTypes.string.isRequired,
+    target: PropTypes.string.isRequired,
     value: PropTypes.number.isRequired,
   })).isRequired,
 };

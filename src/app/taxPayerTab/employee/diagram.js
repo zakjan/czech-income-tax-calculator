@@ -9,69 +9,67 @@ import PeriodFactor from 'models/periodFactor.js';
 const EmployeeDiagram = props => {
   const periodFactor = PeriodFactor[props.period];
 
-  const wage = props.income;
+  const grossSalary = props.income;
   const benefit = props.benefit;
 
-  const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromWage(wage);
-  const employerSicknessInsurance = TaxCalculator.employerSicknessInsuranceFromWage(wage);
-  const employerHealthInsurance = TaxCalculator.employerHealthInsuranceFromWage(wage);
-  const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromWage(wage);
-  const employeeSicknessInsurance = TaxCalculator.employeeSicknessInsuranceFromWage(wage);
-  const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromWage(wage);
+  const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromGrossSalary(grossSalary);
+  const employerSicknessInsurance = TaxCalculator.employerSicknessInsuranceFromGrossSalary(grossSalary);
+  const employerHealthInsurance = TaxCalculator.employerHealthInsuranceFromGrossSalary(grossSalary);
+  const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromGrossSalary(grossSalary);
+  const employeeSicknessInsurance = TaxCalculator.employeeSicknessInsuranceFromGrossSalary(grossSalary);
+  const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromGrossSalary(grossSalary);
 
-  const taxableIncome = TaxCalculator.taxableIncomeFromWageAndEmployerInsurance(wage, employerSocialInsurance + employerHealthInsurance);
-
-  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
-  const taxedIncome = wage - incomeTax - employeeSocialInsurance - employeeSicknessInsurance - employeeHealthInsurance;
+  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(grossSalary);
+  const netSalary = grossSalary - incomeTax - employeeSocialInsurance - employeeSicknessInsurance - employeeHealthInsurance;
 
   const nodes = [
-    { id: 0, name: 'Náklady zaměstnavatele', color: '#1f77b4' },
+    { id: 'employerExpense', name: 'Náklady zaměstnavatele', color: '#1f77b4' },
 
-    { id: 1, name: 'Sociální pojištění zaměstnavatele', color: '#ffbb78' },
-    { id: 2, name: 'Nemocenské pojištění zaměstnavatele', color: '#ffbb78' },
-    { id: 3, name: 'Zdravotní pojištění zaměstnavatele', color: '#ffbb78' },
-    { id: 4, name: 'Hrubá mzda', color: '#aec7e8' },
-    { id: 5, name: 'Benefity', color: '#aec7e8' },
+    { id: 'employerSocialInsurance', name: 'Sociální pojištění zaměstnavatele', color: '#ffbb78' },
+    { id: 'employerSicknessInsurance', name: 'Nemocenské pojištění zaměstnavatele', color: '#ffbb78' },
+    { id: 'employerHealthInsurance', name: 'Zdravotní pojištění zaměstnavatele', color: '#ffbb78' },
+    { id: 'grossSalary', name: 'Hrubá mzda', color: '#aec7e8' },
+    { id: 'benefit', name: 'Benefity', color: '#aec7e8' },
 
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9, name: 'Daň z příjmu', color: '#ffbb78' },
-    { id: 10, name: 'Sociální pojištění zaměstnance', color: '#ffbb78' },
-    { id: 11, name: 'Nemocenské pojištění zaměstnance', color: '#ffbb78' },
-    { id: 12, name: 'Zdravotní pojištění zaměstnance', color: '#ffbb78' },
-    { id: 13, name: 'Čistá mzda', color: '#aec7e8' },
-    { id: 14 },
+    { id: 'employerSocialInsuranceDummy' },
+    { id: 'employerSicknessInsuranceDummy' },
+    { id: 'employerHealthInsuranceDummy' },
+    { id: 'incomeTax', name: 'Daň z příjmu', color: '#ffbb78' },
+    { id: 'employeeSocialInsurance', name: 'Sociální pojištění zaměstnance', color: '#ffbb78' },
+    { id: 'employeeSicknessInsurance', name: 'Nemocenské pojištění zaměstnance', color: '#ffbb78' },
+    { id: 'employeeHealthInsurance', name: 'Zdravotní pojištění zaměstnance', color: '#ffbb78' },
+    { id: 'netSalary', name: 'Čistá mzda', color: '#aec7e8' },
+    { id: 'benefitDummy' },
 
-    { id: 15, name: 'Daně', color: '#d62728' },
-    { id: 16, name: 'Příjmy po zdanění', color: '#2ca02c' },
+    { id: 'taxes', name: 'Daně', color: '#d62728' },
+    { id: 'netSalaryWithBenefit', name: 'Čistá mzda s benefity', color: '#2ca02c' },
   ];
   const links = [
-    { source: 0, target: 1, value: employerSocialInsurance / periodFactor },
-    { source: 0, target: 2, value: employerSicknessInsurance / periodFactor },
-    { source: 0, target: 3, value: employerHealthInsurance / periodFactor },
-    { source: 0, target: 4, value: wage / periodFactor },
-    { source: 0, target: 5, value: benefit / periodFactor },
+    { source: 'employerExpense', target: 'employerSocialInsurance', value: employerSocialInsurance / periodFactor },
+    { source: 'employerExpense', target: 'employerSicknessInsurance', value: employerSicknessInsurance / periodFactor },
+    { source: 'employerExpense', target: 'employerHealthInsurance', value: employerHealthInsurance / periodFactor },
+    { source: 'employerExpense', target: 'grossSalary', value: grossSalary / periodFactor },
+    { source: 'employerExpense', target: 'benefit', value: benefit / periodFactor },
 
-    { source: 1, target: 6, value: employerSocialInsurance / periodFactor },
-    { source: 2, target: 7, value: employerSicknessInsurance / periodFactor },
-    { source: 3, target: 8, value: employerHealthInsurance / periodFactor },
-    { source: 4, target: 9, value: incomeTax / periodFactor },
-    { source: 4, target: 10, value: employeeSocialInsurance / periodFactor },
-    { source: 4, target: 11, value: employeeSicknessInsurance / periodFactor },
-    { source: 4, target: 12, value: employeeHealthInsurance / periodFactor },
-    { source: 4, target: 13, value: taxedIncome / periodFactor },
-    { source: 5, target: 14, value: benefit / periodFactor },
+    { source: 'employerSocialInsurance', target: 'employerSocialInsuranceDummy', value: employerSocialInsurance / periodFactor },
+    { source: 'employerSicknessInsurance', target: 'employerSicknessInsuranceDummy', value: employerSicknessInsurance / periodFactor },
+    { source: 'employerHealthInsurance', target: 'employerHealthInsuranceDummy', value: employerHealthInsurance / periodFactor },
+    { source: 'grossSalary', target: 'incomeTax', value: incomeTax / periodFactor },
+    { source: 'grossSalary', target: 'employeeSocialInsurance', value: employeeSocialInsurance / periodFactor },
+    { source: 'grossSalary', target: 'employeeSicknessInsurance', value: employeeSicknessInsurance / periodFactor },
+    { source: 'grossSalary', target: 'employeeHealthInsurance', value: employeeHealthInsurance / periodFactor },
+    { source: 'grossSalary', target: 'netSalary', value: netSalary / periodFactor },
+    { source: 'benefit', target: 'benefitDummy', value: benefit / periodFactor },
 
-    { source: 6, target: 15, value: employerSocialInsurance / periodFactor },
-    { source: 7, target: 15, value: employerSicknessInsurance / periodFactor },
-    { source: 8, target: 15, value: employerHealthInsurance / periodFactor },
-    { source: 9, target: 15, value: incomeTax / periodFactor },
-    { source: 10, target: 15, value: employeeSocialInsurance / periodFactor },
-    { source: 11, target: 15, value: employeeSicknessInsurance / periodFactor },
-    { source: 12, target: 15, value: employeeHealthInsurance / periodFactor },
-    { source: 13, target: 16, value: taxedIncome / periodFactor },
-    { source: 14, target: 16, value: benefit / periodFactor },
+    { source: 'employerSocialInsuranceDummy', target: 'taxes', value: employerSocialInsurance / periodFactor },
+    { source: 'employerSicknessInsuranceDummy', target: 'taxes', value: employerSicknessInsurance / periodFactor },
+    { source: 'employerHealthInsuranceDummy', target: 'taxes', value: employerHealthInsurance / periodFactor },
+    { source: 'incomeTax', target: 'taxes', value: incomeTax / periodFactor },
+    { source: 'employeeSocialInsurance', target: 'taxes', value: employeeSocialInsurance / periodFactor },
+    { source: 'employeeSicknessInsurance', target: 'taxes', value: employeeSicknessInsurance / periodFactor },
+    { source: 'employeeHealthInsurance', target: 'taxes', value: employeeHealthInsurance / periodFactor },
+    { source: 'netSalary', target: 'netSalaryWithBenefit', value: netSalary / periodFactor },
+    { source: 'benefitDummy', target: 'netSalaryWithBenefit', value: benefit / periodFactor },
   ];
 
   return (

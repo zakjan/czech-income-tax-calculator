@@ -27,7 +27,7 @@ const TaxCalculator = {
     return 2024;
   },
 
-  taxableExpenseFromIncomeAndFlatExpenseRate: (income, expense, flatExpenseRate) => {
+  taxableExpenseFromIncomeAndExpenseAndFlatExpenseRate: (income, expense, flatExpenseRate) => {
     return Math.max(expense, Math.min(income, maximalIncomeForFlatExpense) * flatExpenseRate);
   },
 
@@ -59,33 +59,28 @@ const TaxCalculator = {
     return healthInsuranceTaxableBase * healthInsuranceRate;
   },
 
-  taxableIncomeFromWageAndEmployerInsurance: (wage, employerInsurance) => {
-    // return wage + employerInsurance; // superhrubá mzda zrušena od 2021
-    return wage;
+  employeeSocialInsuranceFromGrossSalary: grossSalary => {
+    return grossSalary * employeeSocialInsuranceRate;
   },
 
-  employeeSocialInsuranceFromWage: wage => {
-    return wage * employeeSocialInsuranceRate;
+  employeeSicknessInsuranceFromGrossSalary: grossSalary => {
+    return grossSalary * employeeSicknessInsuranceRate;
   },
 
-  employeeSicknessInsuranceFromWage: wage => {
-    return wage * employeeSicknessInsuranceRate;
+  employeeHealthInsuranceFromGrossSalary: grossSalary => {
+    return grossSalary * employeeHealthInsuranceRate;
   },
 
-  employeeHealthInsuranceFromWage: wage => {
-    return wage * employeeHealthInsuranceRate;
+  employerSocialInsuranceFromGrossSalary: grossSalary => {
+    return grossSalary * employerSocialInsuranceRate;
   },
 
-  employerSocialInsuranceFromWage: wage => {
-    return wage * employerSocialInsuranceRate;
+  employerSicknessInsuranceFromGrossSalary: grossSalary => {
+    return grossSalary * employerSicknessInsuranceRate;
   },
 
-  employerSicknessInsuranceFromWage: wage => {
-    return wage * employerSicknessInsuranceRate;
-  },
-
-  employerHealthInsuranceFromWage: wage => {
-    return wage * employerHealthInsuranceRate;
+  employerHealthInsuranceFromGrossSalary: grossSalary => {
+    return grossSalary * employerHealthInsuranceRate;
   },
 };
 
