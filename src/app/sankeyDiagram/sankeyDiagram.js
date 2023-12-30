@@ -49,9 +49,10 @@ class SankeyDiagram extends React.Component {
       .nodeWidth(nodeWidth)
       .nodePadding(nodePadding);
 
+    // hide links with zero value
     const { nodes, links } = sankey({
-      nodes: this.props.nodes,
-      links: this.props.links.map(x => ({ ...x, value: Math.max(x.value, 0.1) })),
+      nodes: this.props.nodes.filter(node => this.props.links.some(link => (link.source === node.id || link.target === node.id) && link.value > 0)),
+      links: this.props.links.filter(link => link.value > 0),
     });
 
     const totalValue = nodes[0].value;
