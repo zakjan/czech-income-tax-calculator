@@ -8,7 +8,6 @@ import PeriodFactor from 'models/periodFactor.js';
 
 const ContractorDiagram = props => {
   const periodFactor = PeriodFactor[props.period];
-
   const grossIncome = props.grossIncome;
   const expense = props.expense;
   const flatExpenseRate = props.flatExpenseRate;
@@ -39,7 +38,7 @@ const ContractorDiagram = props => {
     { id: 'healthInsurance', name: 'Zdravotní pojištění', color: '#ffbb78' },
     { id: 'netIncomeDummy' },
 
-    { id: 'virtualExpense', name: 'Výdaje', color: '#d62728' },
+    { id: 'expense', name: 'Výdaje', color: '#d62728' },
     { id: 'taxes', name: 'Daně', color: '#d62728' },
     { id: 'netIncome', name: 'Příjmy po zdanění', color: '#2ca02c' },
   ];
@@ -55,7 +54,7 @@ const ContractorDiagram = props => {
     { source: 'incomeTaxableBase', target: 'healthInsurance', value: healthInsurance / periodFactor },
     { source: 'incomeTaxableBase', target: 'netIncomeDummy', value: netIncome / periodFactor },
 
-    { source: 'expenseDummy', target: 'virtualExpense', value: expense / periodFactor },
+    { source: 'expenseDummy', target: 'expense', value: expense / periodFactor },
     { source: 'virtualExpenseDummy', target: 'netIncome', value: virtualExpense / periodFactor },
     { source: 'incomeTax', target: 'taxes', value: incomeTax / periodFactor },
     { source: 'socialInsurance', target: 'taxes', value: socialInsurance / periodFactor },
