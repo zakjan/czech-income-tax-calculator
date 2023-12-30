@@ -10,7 +10,7 @@ const actions = {
   setBenefit: createAction(actionTypes.SET_BENEFIT),
   setExpense: createAction(actionTypes.SET_EXPENSE),
   setFlatExpenseRate: createAction(actionTypes.SET_FLAT_EXPENSE_RATE),
-  setSicknessInsurance: createAction(actionTypes.SET_SICKNESS_INSURANCE),
+  setSicknessInsuranceEnabled: createAction(actionTypes.SET_SICKNESS_INSURANCE_ENABLED),
 };
 
 

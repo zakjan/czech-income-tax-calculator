@@ -14,7 +14,7 @@ const initialState = Immutable.Map({
   benefit: savedState.benefit || 0,
   expense: savedState.expense || 0,
   flatExpenseRate: savedState.flatExpenseRate || 0.6,
-  sicknessInsurance: savedState.sicknessInsurance || false,
+  sicknessInsuranceEnabled: savedState.sicknessInsuranceEnabled || false,
 });
 
 const reducer = handleActions({
@@ -48,8 +48,8 @@ const reducer = handleActions({
     window.localStorage.setItem('state', JSON.stringify(newState));
     return newState;
   },
-  [actionTypes.SET_SICKNESS_INSURANCE]: (state, action) => {
-    const newState = state.set('sicknessInsurance', action.payload);
+  [actionTypes.SET_SICKNESS_INSURANCE_ENABLED]: (state, action) => {
+    const newState = state.set('sicknessInsuranceEnabled', action.payload);
     window.localStorage.setItem('state', JSON.stringify(newState));
     return newState;
   },

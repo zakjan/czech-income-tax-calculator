@@ -32,8 +32,8 @@ const ContractorForm = props => {
             <label>
               <input
                 type="checkbox"
-                checked={props.sicknessInsurance}
-                onChange={event => props.setSicknessInsurance(event.target.checked)}
+                checked={props.sicknessInsuranceEnabled}
+                onChange={event => props.setSicknessInsuranceEnabled(event.target.checked)}
               />
               Nemocenské pojištění
             </label>

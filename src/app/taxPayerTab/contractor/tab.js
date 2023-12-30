@@ -7,7 +7,7 @@ import ContractorDiagram from './diagram.js';
 const ContractorTab = props => {
   return (
     <div>
-      <h2>OSVČ s paušálními výdaji</h2>
+      <h2>OSVČ</h2>
       <ContractorForm {...props} />
       <ContractorDiagram {...props} />
     </div>

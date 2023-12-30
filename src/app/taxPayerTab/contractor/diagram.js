@@ -12,15 +12,16 @@ const ContractorDiagram = props => {
   const income = props.income;
   const expense = props.expense;
   const flatExpenseRate = props.flatExpenseRate;
+  const sicknessInsuranceEnabled = props.sicknessInsuranceEnabled;
 
-  const taxableExpense = TaxCalculator.taxableExpenseFromIncomeAndExpenseAndFlatExpenseRate(income, expense, flatExpenseRate);
+  const taxableExpense = TaxCalculator.contractorTaxableExpenseFromIncomeAndExpenseAndFlatExpenseRate(income, expense, flatExpenseRate);
   const taxedExpense = taxableExpense - expense;
 
-  const taxableIncome = TaxCalculator.taxableIncomeFromIncomeAndExpense(income, taxableExpense);
+  const taxableIncome = TaxCalculator.contractorTaxableIncomeFromIncomeAndExpense(income, taxableExpense);
   const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
-  const socialInsurance = TaxCalculator.socialInsuranceFromTaxableIncome(taxableIncome);
-  const sicknessInsurance = props.sicknessInsurance ? TaxCalculator.sicknessInsuranceFromTaxableIncome(taxableIncome) : 0;
-  const healthInsurance = TaxCalculator.healthInsuranceFromTaxableIncome(taxableIncome);
+  const socialInsurance = TaxCalculator.contractorSocialInsuranceFromTaxableIncome(taxableIncome);
+  const sicknessInsurance = TaxCalculator.contractorSicknessInsuranceFromTaxableIncomeIfEnabled(taxableIncome, sicknessInsuranceEnabled);
+  const healthInsurance = TaxCalculator.contractorHealthInsuranceFromTaxableIncome(taxableIncome);
   const taxedIncome = taxableIncome - incomeTax - socialInsurance - sicknessInsurance - healthInsurance;
 
   
