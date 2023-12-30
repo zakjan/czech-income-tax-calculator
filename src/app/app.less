@@ -13,6 +13,15 @@
 
   label {
     cursor: pointer;
+
+    & + label {
+      margin-left: 10px;
+    }
+
+    input[type=radio], input[type=checkbox] {
+      position: relative;
+      top: 2px;
+    }
   }
 
   .github-button {

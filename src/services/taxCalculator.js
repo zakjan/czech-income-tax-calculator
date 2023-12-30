@@ -24,35 +24,35 @@ const TaxCalculator = {
     return 2024;
   },
 
-  contractorTaxableExpenseFromIncomeAndExpenseAndFlatExpenseRate: (income, expense, flatExpenseRate) => {
-    return Math.max(expense, Math.min(income, contractorMaximalIncomeForFlatExpense) * flatExpenseRate);
+  contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate: (grossIncome, expense, flatExpenseRate) => {
+    return Math.max(expense, Math.min(grossIncome, contractorMaximalIncomeForFlatExpense) * flatExpenseRate);
   },
 
-  contractorTaxableIncomeFromIncomeAndExpense: (income, expense) => {
-    return Math.max(income - expense, 0);
+  contractorIncomeTaxableBaseFromGrossIncomeAndExpense: (grossIncome, expense) => {
+    return Math.max(grossIncome - expense, 0);
   },
 
-  incomeTaxFromTaxableIncome: taxableIncome => {
-    const roundedTaxableIncome = Math.floor(taxableIncome / 100) * 100;
+  incomeTaxFromIncomeTaxableBase: incomeTaxableBase => {
+    const roundedIncomeTaxableBase = Math.floor(incomeTaxableBase / 100) * 100;
     const deductions = incomeTaxDeductionForPayer;
-    const incomeTaxZone1 = Math.min(roundedTaxableIncome, incomeThresholdZone2) * incomeTaxRate;
-    const incomeTaxZone2 = Math.max(roundedTaxableIncome - incomeThresholdZone2, 0) * incomeTaxRateZone2;
+    const incomeTaxZone1 = Math.min(roundedIncomeTaxableBase, incomeThresholdZone2) * incomeTaxRate;
+    const incomeTaxZone2 = Math.max(roundedIncomeTaxableBase - incomeThresholdZone2, 0) * incomeTaxRateZone2;
     const incomeTax = incomeTaxZone1 + incomeTaxZone2;
     return Math.max(incomeTax - deductions, 0);
   },
 
-  contractorSocialInsuranceFromTaxableIncome: taxableIncome => {
-    const socialInsuranceTaxableBase = Math.max(Math.min(taxableIncome / 2, contractorMaximalSocialInsuranceTaxableIncome), contractorMinimalSocialInsuranceTaxableIncome);
+  contractorSocialInsuranceFromIncomeTaxableBase: incomeTaxableBase => {
+    const socialInsuranceTaxableBase = Math.max(Math.min(incomeTaxableBase / 2, contractorMaximalSocialInsuranceTaxableIncome), contractorMinimalSocialInsuranceTaxableIncome);
     return socialInsuranceTaxableBase * contractorSocialInsuranceRate;
   },
 
-  contractorSicknessInsuranceFromTaxableIncomeIfEnabled: (taxableIncome, sicknessInsuranceEnabled) => {
-    const sicknessInsuranceTaxableBase = Math.max(taxableIncome / 2, contractorMinimalSicknessInsuranceTaxableIncome);
+  contractorSicknessInsuranceFromIncomeTaxableBaseIfEnabled: (incomeTaxableBase, sicknessInsuranceEnabled) => {
+    const sicknessInsuranceTaxableBase = Math.max(incomeTaxableBase / 2, contractorMinimalSicknessInsuranceTaxableIncome);
     return sicknessInsuranceEnabled ? sicknessInsuranceTaxableBase * contractorSicknessInsuranceRate : 0;
   },
 
-  contractorHealthInsuranceFromTaxableIncome: taxableIncome => {
-    const healthInsuranceTaxableBase = Math.max(taxableIncome / 2, contractorMinimalHealthInsuranceTaxableIncome);
+  contractorHealthInsuranceFromIncomeTaxableBase: incomeTaxableBase => {
+    const healthInsuranceTaxableBase = Math.max(incomeTaxableBase / 2, contractorMinimalHealthInsuranceTaxableIncome);
     return healthInsuranceTaxableBase * contractorHealthInsuranceRate;
   },
 

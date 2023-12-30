@@ -9,59 +9,59 @@ import PeriodFactor from 'models/periodFactor.js';
 const ContractorDiagram = props => {
   const periodFactor = PeriodFactor[props.period];
 
-  const income = props.income;
+  const grossIncome = props.grossIncome;
   const expense = props.expense;
   const flatExpenseRate = props.flatExpenseRate;
   const sicknessInsuranceEnabled = props.sicknessInsuranceEnabled;
 
-  const taxableExpense = TaxCalculator.contractorTaxableExpenseFromIncomeAndExpenseAndFlatExpenseRate(income, expense, flatExpenseRate);
-  const taxedExpense = taxableExpense - expense;
+  const applicableExpense = TaxCalculator.contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(grossIncome, expense, flatExpenseRate);
+  const virtualExpense = applicableExpense - expense;
 
-  const taxableIncome = TaxCalculator.contractorTaxableIncomeFromIncomeAndExpense(income, taxableExpense);
-  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(taxableIncome);
-  const socialInsurance = TaxCalculator.contractorSocialInsuranceFromTaxableIncome(taxableIncome);
-  const sicknessInsurance = TaxCalculator.contractorSicknessInsuranceFromTaxableIncomeIfEnabled(taxableIncome, sicknessInsuranceEnabled);
-  const healthInsurance = TaxCalculator.contractorHealthInsuranceFromTaxableIncome(taxableIncome);
-  const taxedIncome = taxableIncome - incomeTax - socialInsurance - sicknessInsurance - healthInsurance;
+  const incomeTaxableBase = TaxCalculator.contractorIncomeTaxableBaseFromGrossIncomeAndExpense(grossIncome, applicableExpense);
+  const incomeTax = TaxCalculator.incomeTaxFromIncomeTaxableBase(incomeTaxableBase);
+  const socialInsurance = TaxCalculator.contractorSocialInsuranceFromIncomeTaxableBase(incomeTaxableBase);
+  const sicknessInsurance = TaxCalculator.contractorSicknessInsuranceFromIncomeTaxableBaseIfEnabled(incomeTaxableBase, sicknessInsuranceEnabled);
+  const healthInsurance = TaxCalculator.contractorHealthInsuranceFromIncomeTaxableBase(incomeTaxableBase);
+  const netIncome = incomeTaxableBase - incomeTax - socialInsurance - sicknessInsurance - healthInsurance;
 
   
   const nodes = [
-    { id: 'income', name: 'Příjmy', color: '#1f77b4' },
+    { id: 'grossIncome', name: 'Příjmy', color: '#1f77b4' },
 
-    { id: 'taxableExpense', name: 'Uplatněné výdaje', color: '#aec7e8' },
-    { id: 'taxableIncome', name: 'Zdanitelný základ', color: '#aec7e8' },
+    { id: 'applicableExpense', name: 'Uplatnitelné výdaje', color: '#aec7e8' },
+    { id: 'incomeTaxableBase', name: 'Zdanitelný základ', color: '#aec7e8' },
 
     { id: 'expenseDummy' },
-    { id: 'taxedExpenseDummy' },
+    { id: 'virtualExpenseDummy' },
     { id: 'incomeTax', name: 'Daň z příjmu', color: '#ffbb78' },
     { id: 'socialInsurance', name: 'Sociální pojištění', color: '#ffbb78' },
     { id: 'sicknessInsurance', name: 'Nemocenské pojištění', color: '#ffbb78' },
     { id: 'healthInsurance', name: 'Zdravotní pojištění', color: '#ffbb78' },
-    { id: 'taxedIncomeDummy' },
+    { id: 'netIncomeDummy' },
 
-    { id: 'taxedExpense', name: 'Výdaje', color: '#d62728' },
+    { id: 'virtualExpense', name: 'Výdaje', color: '#d62728' },
     { id: 'taxes', name: 'Daně', color: '#d62728' },
-    { id: 'taxedIncome', name: 'Příjmy po zdanění', color: '#2ca02c' },
+    { id: 'netIncome', name: 'Příjmy po zdanění', color: '#2ca02c' },
   ];
   const links = [
-    { source: 'income', target: 'taxableExpense', value: taxableExpense / periodFactor },
-    { source: 'income', target: 'taxableIncome', value: taxableIncome / periodFactor },
+    { source: 'grossIncome', target: 'applicableExpense', value: applicableExpense / periodFactor },
+    { source: 'grossIncome', target: 'incomeTaxableBase', value: incomeTaxableBase / periodFactor },
 
-    { source: 'taxableExpense', target: 'expenseDummy', value: expense / periodFactor },
-    { source: 'taxableExpense', target: 'taxedExpenseDummy', value: taxedExpense / periodFactor },
-    { source: 'taxableIncome', target: 'incomeTax', value: incomeTax / periodFactor },
-    { source: 'taxableIncome', target: 'socialInsurance', value: socialInsurance / periodFactor },
-    { source: 'taxableIncome', target: 'sicknessInsurance', value: sicknessInsurance / periodFactor },
-    { source: 'taxableIncome', target: 'healthInsurance', value: healthInsurance / periodFactor },
-    { source: 'taxableIncome', target: 'taxedIncomeDummy', value: taxedIncome / periodFactor },
+    { source: 'applicableExpense', target: 'expenseDummy', value: expense / periodFactor },
+    { source: 'applicableExpense', target: 'virtualExpenseDummy', value: virtualExpense / periodFactor },
+    { source: 'incomeTaxableBase', target: 'incomeTax', value: incomeTax / periodFactor },
+    { source: 'incomeTaxableBase', target: 'socialInsurance', value: socialInsurance / periodFactor },
+    { source: 'incomeTaxableBase', target: 'sicknessInsurance', value: sicknessInsurance / periodFactor },
+    { source: 'incomeTaxableBase', target: 'healthInsurance', value: healthInsurance / periodFactor },
+    { source: 'incomeTaxableBase', target: 'netIncomeDummy', value: netIncome / periodFactor },
 
-    { source: 'expenseDummy', target: 'taxedExpense', value: expense / periodFactor },
-    { source: 'taxedExpenseDummy', target: 'taxedIncome', value: taxedExpense / periodFactor },
+    { source: 'expenseDummy', target: 'virtualExpense', value: expense / periodFactor },
+    { source: 'virtualExpenseDummy', target: 'netIncome', value: virtualExpense / periodFactor },
     { source: 'incomeTax', target: 'taxes', value: incomeTax / periodFactor },
     { source: 'socialInsurance', target: 'taxes', value: socialInsurance / periodFactor },
     { source: 'sicknessInsurance', target: 'taxes', value: sicknessInsurance / periodFactor },
     { source: 'healthInsurance', target: 'taxes', value: healthInsurance / periodFactor },
-    { source: 'taxedIncomeDummy', target: 'taxedIncome', value: taxedIncome / periodFactor },
+    { source: 'netIncomeDummy', target: 'netIncome', value: netIncome / periodFactor },
   ];
 
   return (
@@ -70,9 +70,10 @@ const ContractorDiagram = props => {
 };
 
 ContractorDiagram.propTypes = {
-  income: PropTypes.number.isRequired,
+  grossIncome: PropTypes.number.isRequired,
   expense: PropTypes.number.isRequired,
   flatExpenseRate: PropTypes.number.isRequired,
+  sicknessInsuranceEnabled: PropTypes.bool.isRequired,
 };
 
 

@@ -9,7 +9,7 @@ import PeriodFactor from 'models/periodFactor.js';
 const EmployeeDiagram = props => {
   const periodFactor = PeriodFactor[props.period];
 
-  const grossSalary = props.income;
+  const grossSalary = props.grossSalary;
   const benefit = props.benefit;
 
   const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromGrossSalary(grossSalary);
@@ -17,7 +17,7 @@ const EmployeeDiagram = props => {
   const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromGrossSalary(grossSalary);
   const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromGrossSalary(grossSalary);
 
-  const incomeTax = TaxCalculator.incomeTaxFromTaxableIncome(grossSalary);
+  const incomeTax = TaxCalculator.incomeTaxFromIncomeTaxableBase(grossSalary);
   const netSalary = grossSalary - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [
@@ -68,7 +68,8 @@ const EmployeeDiagram = props => {
 };
 
 EmployeeDiagram.propTypes = {
-  income: PropTypes.number.isRequired,
+  grossSalary: PropTypes.number.isRequired,
+  benefit: PropTypes.number.isRequired,
 };
 
 

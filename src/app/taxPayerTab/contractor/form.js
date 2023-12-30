@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import MoneyInput from 'app/moneyInput/moneyInput.js';
 import NumberSelect from 'app/numberSelect/numberSelect.js';
@@ -10,7 +11,7 @@ const ContractorForm = props => {
       <tbody>
         <tr>
           <td>Příjmy:</td>
-          <td><MoneyInput period={props.period} value={props.income} onChange={props.setIncome} /></td>
+          <td><MoneyInput period={props.period} value={props.grossIncome} onChange={props.setGrossIncome} /></td>
         </tr>
         <tr>
           <td>Výdaje:</td>
@@ -42,6 +43,15 @@ const ContractorForm = props => {
       </tbody>
     </table>
   );
+};
+
+ContractorForm.propTypes = {
+  grossIncome: PropTypes.number.isRequired,
+  expense: PropTypes.number.isRequired,
+  sicknessInsuranceEnabled: PropTypes.bool.isRequired,
+  setGrossIncome: PropTypes.func.isRequired,
+  setExpense: PropTypes.func.isRequired,
+  setSicknessInsuranceEnabled: PropTypes.func.isRequired,
 };
 
 

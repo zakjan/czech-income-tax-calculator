@@ -4,10 +4,10 @@ import actionTypes from './actionTypes.js';
 
 
 const actions = {
-  setTaxPayerType: createAction(actionTypes.SET_TAX_PAYER_TYPE),
   setPeriod: createAction(actionTypes.SET_PERIOD),
-  setIncome: createAction(actionTypes.SET_INCOME),
+  setGrossSalary: createAction(actionTypes.SET_GROSS_SALARY),
   setBenefit: createAction(actionTypes.SET_BENEFIT),
+  setGrossIncome: createAction(actionTypes.SET_GROSS_INCOME),
   setExpense: createAction(actionTypes.SET_EXPENSE),
   setFlatExpenseRate: createAction(actionTypes.SET_FLAT_EXPENSE_RATE),
   setSicknessInsuranceEnabled: createAction(actionTypes.SET_SICKNESS_INSURANCE_ENABLED),

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import MoneyInput from 'app/moneyInput/moneyInput.js';
 
@@ -9,7 +10,7 @@ const EmployeeForm = props => {
       <tbody>
         <tr>
           <td>Hrubá mzda:</td>
-          <td><MoneyInput period={props.period} value={props.income} onChange={props.setIncome} /></td>
+          <td><MoneyInput period={props.period} value={props.grossSalary} onChange={props.setGrossSalary} /></td>
         </tr>
         <tr>
           <td>Benefity:</td>
@@ -18,6 +19,13 @@ const EmployeeForm = props => {
       </tbody>
     </table>
   );
+};
+
+EmployeeForm.propTypes = {
+  grossSalary: PropTypes.number.isRequired,
+  benefit: PropTypes.number.isRequired,
+  setGrossSalary: PropTypes.func.isRequired,
+  setBenefit: PropTypes.func.isRequired,
 };
 
 

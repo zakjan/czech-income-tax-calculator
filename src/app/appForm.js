@@ -1,40 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TaxPayerType from 'models/taxPayerType.js';
 import Period from 'models/period.js';
 
 
 const AppForm = props => {
   return (
     <div>
-      <h3>Typ poplatníka</h3>
       <p>
-        <label>
-          <input
-            type="radio"
-            name="taxPayerType"
-            value={TaxPayerType.EMPLOYEE}
-            checked={props.taxPayerType === TaxPayerType.EMPLOYEE}
-            onChange={event => props.setTaxPayerType(event.target.value)}
-          />
-          Zaměstnanec
-        </label>
-        <br />
-        <label>
-          <input
-            type="radio"
-            name="taxPayerType"
-            value={TaxPayerType.CONTRACTOR}
-            checked={props.taxPayerType === TaxPayerType.CONTRACTOR}
-            onChange={event => props.setTaxPayerType(event.target.value)}
-          />
-          OSVČ
-        </label>
-      </p>
+        Částky za období:
 
-      <h3>Částky za období</h3>
-      <p>
         <label>
           <input
             type="radio"
@@ -45,7 +20,7 @@ const AppForm = props => {
           />
           Kč / rok
         </label>
-        <br />
+        
         <label>
           <input
             type="radio"
@@ -56,7 +31,7 @@ const AppForm = props => {
           />
           Kč / měsíc
         </label>
-        <br />
+        
         <label>
           <input
             type="radio"
@@ -67,7 +42,7 @@ const AppForm = props => {
           />
           Kč / den
         </label>
-        <br />
+        
         <label>
           <input
             type="radio"
@@ -84,15 +59,8 @@ const AppForm = props => {
 };
 
 AppForm.propTypes = {
-  income: PropTypes.number.isRequired,
-  benefit: PropTypes.number.isRequired,
-  expense: PropTypes.number.isRequired,
-  flatExpenseRate: PropTypes.number.isRequired,
-  sicknessInsuranceEnabled: PropTypes.bool.isRequired,
-  setIncome: PropTypes.func.isRequired,
-  setBenefit: PropTypes.func.isRequired,
-  setExpense: PropTypes.func.isRequired,
-  setSicknessInsuranceEnabled: PropTypes.func.isRequired,
+  period: PropTypes.string.isRequired,
+  setPeriod: PropTypes.func.isRequired,
 };
 
 
