@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MoneyInput from 'app/moneyInput/moneyInput.js';
 import NumberSelect from 'app/numberSelect/numberSelect.js';
 import NumberInput from 'app/numberInput/numberInput.js';
+import formatCurrency from 'services/formatCurrency.js';
 
 
 const ContractorForm = props => {
@@ -11,12 +12,14 @@ const ContractorForm = props => {
     <table>
       <tbody>
         <tr>
-          <td>Příjmy:</td>
-          <td><MoneyInput period={props.period} value={props.grossIncome} onChange={props.setGrossIncome} /></td>
+          <td width="110">Příjmy:</td>
+          <td width="150"><MoneyInput period={props.period} value={props.grossIncome} onChange={props.setGrossIncome} /></td>
+          <td align="right">{formatCurrency(props.grossIncome)} / rok</td>
         </tr>
         <tr>
           <td>Výdaje:</td>
           <td><MoneyInput period={props.period} value={props.expense} onChange={props.setExpense} /></td>
+          <td align="right">{formatCurrency(props.expense)} / rok</td>
         </tr>
         <tr>
           <td>Výdajový paušál:</td>

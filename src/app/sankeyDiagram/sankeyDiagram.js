@@ -1,10 +1,9 @@
 import * as d3Sankey from 'd3-sankey';
 import * as d3Selection from 'd3-selection';
-import * as d3Format from 'd3-format';
-import d3FormatCsCzLocale from 'd3-format/locale/cs-CZ.json';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import formatCurrency from 'services/formatCurrency.js';
 import './sankeyDiagram.less';
 
 
@@ -32,9 +31,6 @@ class SankeyDiagram extends React.Component {
     const padding = 10;
     const width = diagramWidth + 2 * padding + linkWidth;
     const height = diagramHeight + 2 * padding;
-
-    d3Format.formatDefaultLocale(d3FormatCsCzLocale);
-    const formatCurrency = d3Format.format('$,d');
 
     const svg = d3Selection.select(this.element.current).append('svg')
       .attr('class', 'sankey-diagram')
