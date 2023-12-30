@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var Promise = require('es6-promise').Promise;
 var Webpack = require('webpack');
 
-var APP_NAME = 'Kalkulačka daně z příjmů';
+var APP_NAME = 'Kalkulačka daně z příjmů fyzických osob';
 
 
 module.exports = {

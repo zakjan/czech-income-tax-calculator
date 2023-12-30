@@ -10,7 +10,7 @@ import './app.less';
 const App = props => {
   return (
     <div className="app">
-      <h1>Kalkulačka daně z příjmů za rok {TaxCalculator.getYear()}</h1>
+      <h1>Kalkulačka daně z příjmů fyzických osob pro rok {TaxCalculator.getYear()}</h1>
       <AppForm {...props} />
       <TaxPayerTab {...props} />
     </div>
