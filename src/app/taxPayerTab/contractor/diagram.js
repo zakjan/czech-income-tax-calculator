@@ -31,7 +31,7 @@ const ContractorDiagram = props => {
 
     { id: 'expenseDummy' },
     { id: 'virtualExpenseDummy' },
-    { id: 'incomeTax', name: 'Daň z příjmu', color: '#ffbb78' },
+    { id: 'incomeTax', name: 'Daň z příjmů fyzických osob', color: '#ffbb78' },
     { id: 'socialInsurance', name: 'Sociální pojištění', color: '#ffbb78' },
     { id: 'sicknessInsurance', name: 'Nemocenské pojištění', color: '#ffbb78' },
     { id: 'healthInsurance', name: 'Zdravotní pojištění', color: '#ffbb78' },
