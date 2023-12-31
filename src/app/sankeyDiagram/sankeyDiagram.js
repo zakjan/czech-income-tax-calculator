@@ -39,16 +39,22 @@ class SankeyDiagram extends React.Component {
       .append('g')
       .attr('transform', `translate(${padding}, ${padding})`);
 
+    // hide links with zero value
+    const nonzeroNodes = this.props.nodes.filter(node => this.props.links.some(link => (link.source === node.id || link.target === node.id) && link.value > 0));
+    const nonzeroLinks = this.props.links.filter(link => link.value > 0);
+    if (nonzeroNodes.length === 0) {
+      return;
+    }
+
     const sankey = d3Sankey.sankey()
       .nodeId(d => d.id)
       .size([diagramWidth, diagramHeight])
       .nodeWidth(nodeWidth)
       .nodePadding(nodePadding);
 
-    // hide links with zero value
     const { nodes, links } = sankey({
-      nodes: this.props.nodes.filter(node => this.props.links.some(link => (link.source === node.id || link.target === node.id) && link.value > 0)),
-      links: this.props.links.filter(link => link.value > 0),
+      nodes: nonzeroNodes,
+      links: nonzeroLinks,
     });
 
     const totalValue = nodes[0].value;

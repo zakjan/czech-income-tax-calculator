@@ -2,22 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MoneyInput from 'app/moneyInput/moneyInput.js';
+import NumberInput from 'app/numberInput/numberInput.js';
+import TaxCalculator from 'services/taxCalculator.js';
 import formatCurrency from 'services/formatCurrency.js';
 
 
 const EmployeeForm = props => {
+  const { period, employee: { grossSalary, benefit, unpaidDays }} = props;
+
+  const activeGrossSalary = TaxCalculator.activeAmountWithoutUnpaidDays(grossSalary, unpaidDays);
+
   return (
     <table>
       <tbody>
         <tr>
-          <td width="110">Hrubá mzda:</td>
-          <td width="150"><MoneyInput period={props.period} value={props.grossSalary} onChange={props.setGrossSalary} /></td>
-          <td align="right">{formatCurrency(props.grossSalary)} / rok</td>
+          <td width="150">Hrubá mzda:</td>
+          <td width="150"><MoneyInput period={period} value={grossSalary} onChange={props.setEmployeeGrossSalary} /></td>
+          <td align="right">{formatCurrency(activeGrossSalary)} / rok</td>
         </tr>
         <tr>
-          <td>Benefity:</td>
-          <td><MoneyInput period={props.period} value={props.benefit} onChange={props.setBenefit} /></td>
-          <td align="right">{formatCurrency(props.benefit)} / rok</td>
+          <td>Osvobozené příspěvky:</td>
+          <td><MoneyInput period={period} value={benefit} onChange={props.setEmployeeBenefit} /></td>
+          <td align="right">{formatCurrency(benefit)} / rok</td>
+        </tr>
+        <tr>
+          <td>Neplacené volno:</td>
+          <td><NumberInput value={unpaidDays} onChange={props.setEmployeeUnpaidDays} /> dnů / rok</td>
         </tr>
       </tbody>
     </table>
@@ -25,10 +35,13 @@ const EmployeeForm = props => {
 };
 
 EmployeeForm.propTypes = {
-  grossSalary: PropTypes.number.isRequired,
-  benefit: PropTypes.number.isRequired,
-  setGrossSalary: PropTypes.func.isRequired,
-  setBenefit: PropTypes.func.isRequired,
+  period: PropTypes.string.isRequired,
+  employee: PropTypes.shape({
+    grossSalary: PropTypes.number.isRequired,
+    benefit: PropTypes.number.isRequired,
+  }),
+  setEmployeeGrossSalary: PropTypes.func.isRequired,
+  setEmployeeBenefit: PropTypes.func.isRequired,
 };
 
 

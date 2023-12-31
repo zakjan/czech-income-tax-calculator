@@ -5,13 +5,14 @@ import actionTypes from './actionTypes.js';
 
 const actions = {
   setPeriod: createAction(actionTypes.SET_PERIOD),
-  setGrossSalary: createAction(actionTypes.SET_GROSS_SALARY),
-  setBenefit: createAction(actionTypes.SET_BENEFIT),
-  setGrossIncome: createAction(actionTypes.SET_GROSS_INCOME),
-  setExpense: createAction(actionTypes.SET_EXPENSE),
-  setFlatExpenseRate: createAction(actionTypes.SET_FLAT_EXPENSE_RATE),
-  setSicknessInsuranceEnabled: createAction(actionTypes.SET_SICKNESS_INSURANCE_ENABLED),
-  setUnpaidDays: createAction(actionTypes.SET_UNPAID_DAYS),
+  setEmployeeGrossSalary: createAction(actionTypes.SET_EMPLOYEE_GROSS_SALARY),
+  setEmployeeBenefit: createAction(actionTypes.SET_EMPLOYEE_BENEFIT),
+  setEmployeeUnpaidDays: createAction(actionTypes.SET_EMPLOYEE_UNPAID_DAYS),
+  setContractorGrossIncome: createAction(actionTypes.SET_CONTRACTOR_GROSS_INCOME),
+  setContractorExpense: createAction(actionTypes.SET_CONTRACTOR_EXPENSE),
+  setContractorFlatExpenseRate: createAction(actionTypes.SET_CONTRACTOR_FLAT_EXPENSE_RATE),
+  setContractorSicknessInsuranceEnabled: createAction(actionTypes.SET_CONTRACTOR_SICKNESS_INSURANCE_ENABLED),
+  setContractorUnpaidDays: createAction(actionTypes.SET_CONTRACTOR_UNPAID_DAYS),
 };
 
 

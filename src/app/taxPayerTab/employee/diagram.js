@@ -7,16 +7,17 @@ import PeriodFactor from 'models/periodFactor.js';
 
 
 const EmployeeDiagram = props => {
-  const periodFactor = PeriodFactor[props.period];
-  const grossSalary = props.grossSalary;
-  const benefit = props.benefit;
+  const { period, employee: { grossSalary, benefit, unpaidDays }} = props;
+  const periodFactor = PeriodFactor[period];
 
-  const incomeTax = TaxCalculator.incomeTaxFromIncomeTaxableBase(grossSalary);
-  const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromGrossSalary(grossSalary);
-  const employerHealthInsurance = TaxCalculator.employerHealthInsuranceFromGrossSalary(grossSalary);
-  const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromGrossSalary(grossSalary);
-  const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromGrossSalary(grossSalary);
-  const netSalary = grossSalary - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
+  const activeGrossSalary = TaxCalculator.activeAmountWithoutUnpaidDays(grossSalary, unpaidDays);
+
+  const incomeTax = TaxCalculator.incomeTaxFromIncomeTaxableBase(activeGrossSalary);
+  const employerSocialInsurance = TaxCalculator.employerSocialInsuranceFromGrossSalary(activeGrossSalary);
+  const employerHealthInsurance = TaxCalculator.employerHealthInsuranceFromGrossSalary(activeGrossSalary);
+  const employeeSocialInsurance = TaxCalculator.employeeSocialInsuranceFromGrossSalary(activeGrossSalary);
+  const employeeHealthInsurance = TaxCalculator.employeeHealthInsuranceFromGrossSalary(activeGrossSalary);
+  const netSalary = activeGrossSalary - incomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [
     { id: 'employerExpense', name: 'Náklady zaměstnavatele', color: '#1f77b4' },
@@ -24,7 +25,7 @@ const EmployeeDiagram = props => {
     { id: 'employerSocialInsurance', name: 'Sociální pojištění zaměstnavatele', color: '#ffbb78' },
     { id: 'employerHealthInsurance', name: 'Zdravotní pojištění zaměstnavatele', color: '#ffbb78' },
     { id: 'grossSalary', name: 'Hrubá mzda', color: '#aec7e8' },
-    { id: 'benefit', name: 'Benefity', color: '#aec7e8' },
+    { id: 'benefit', name: 'Osvobozené příspěvky', color: '#aec7e8' },
 
     { id: 'employerSocialInsuranceDummy' },
     { id: 'employerHealthInsuranceDummy' },
@@ -35,12 +36,12 @@ const EmployeeDiagram = props => {
     { id: 'benefitDummy' },
 
     { id: 'taxes', name: 'Daně', color: '#d62728' },
-    { id: 'netSalaryWithBenefit', name: 'Čistá mzda s benefity', color: '#2ca02c' },
+    { id: 'netSalaryWithBenefit', name: 'Čisté příjmy', color: '#2ca02c' },
   ];
   const links = [
     { source: 'employerExpense', target: 'employerSocialInsurance', value: employerSocialInsurance / periodFactor },
     { source: 'employerExpense', target: 'employerHealthInsurance', value: employerHealthInsurance / periodFactor },
-    { source: 'employerExpense', target: 'grossSalary', value: grossSalary / periodFactor },
+    { source: 'employerExpense', target: 'grossSalary', value: activeGrossSalary / periodFactor },
     { source: 'employerExpense', target: 'benefit', value: benefit / periodFactor },
 
     { source: 'employerSocialInsurance', target: 'employerSocialInsuranceDummy', value: employerSocialInsurance / periodFactor },
@@ -66,8 +67,11 @@ const EmployeeDiagram = props => {
 };
 
 EmployeeDiagram.propTypes = {
-  grossSalary: PropTypes.number.isRequired,
-  benefit: PropTypes.number.isRequired,
+  period: PropTypes.string.isRequired,
+  employee: PropTypes.shape({
+    grossSalary: PropTypes.number.isRequired,
+    benefit: PropTypes.number.isRequired,
+  }),
 };
 
 

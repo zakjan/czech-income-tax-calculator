@@ -27,7 +27,7 @@ const TaxCalculator = {
     return 2024;
   },
 
-  contractorAmountWithoutUnpaidDays: (amount, unpaidDays) => {
+  activeAmountWithoutUnpaidDays: (amount, unpaidDays) => {
     return Math.max(amount * ((PeriodFactor[Period.DAY] - unpaidDays) / PeriodFactor[Period.DAY]), 0);
   },
 

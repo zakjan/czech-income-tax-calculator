@@ -5,6 +5,8 @@ import Period from 'models/period.js';
 
 
 const AppForm = props => {
+  const { period } = props;
+
   return (
     <table>
       <tbody>
@@ -16,7 +18,7 @@ const AppForm = props => {
                 type="radio"
                 name="period"
                 value={Period.YEAR}
-                checked={props.period === Period.YEAR}
+                checked={period === Period.YEAR}
                 onChange={event => props.setPeriod(event.target.value)}
               />
               Kč / rok
@@ -27,7 +29,7 @@ const AppForm = props => {
                 type="radio"
                 name="period"
                 value={Period.MONTH}
-                checked={props.period === Period.MONTH}
+                checked={period === Period.MONTH}
                 onChange={event => props.setPeriod(event.target.value)}
               />
               Kč / měsíc
@@ -38,7 +40,7 @@ const AppForm = props => {
                 type="radio"
                 name="period"
                 value={Period.DAY}
-                checked={props.period === Period.DAY}
+                checked={period === Period.DAY}
                 onChange={event => props.setPeriod(event.target.value)}
               />
               Kč / den
@@ -49,7 +51,7 @@ const AppForm = props => {
                 type="radio"
                 name="period"
                 value={Period.HOUR}
-                checked={props.period === Period.HOUR}
+                checked={period === Period.HOUR}
                 onChange={event => props.setPeriod(event.target.value)}
               />
               Kč / hodina

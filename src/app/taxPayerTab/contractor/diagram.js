@@ -7,14 +7,10 @@ import PeriodFactor from 'models/periodFactor.js';
 
 
 const ContractorDiagram = props => {
-  const periodFactor = PeriodFactor[props.period];
-  const grossIncome = props.grossIncome;
-  const expense = props.expense;
-  const flatExpenseRate = props.flatExpenseRate;
-  const sicknessInsuranceEnabled = props.sicknessInsuranceEnabled;
-  const unpaidDays = props.unpaidDays;
+  const { period, contractor: { grossIncome, expense, flatExpenseRate, sicknessInsuranceEnabled, unpaidDays }} = props;
+  const periodFactor = PeriodFactor[period];
 
-  const activeGrossIncome = TaxCalculator.contractorAmountWithoutUnpaidDays(grossIncome, unpaidDays);
+  const activeGrossIncome = TaxCalculator.activeAmountWithoutUnpaidDays(grossIncome, unpaidDays);
   
   const applicableExpense = TaxCalculator.contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(activeGrossIncome, expense, flatExpenseRate);
   const virtualExpense = applicableExpense - expense;
@@ -43,7 +39,7 @@ const ContractorDiagram = props => {
 
     { id: 'expense', name: 'Výdaje', color: '#d62728' },
     { id: 'taxes', name: 'Daně', color: '#d62728' },
-    { id: 'netIncome', name: 'Příjmy po zdanění', color: '#2ca02c' },
+    { id: 'netIncome', name: 'Čisté příjmy', color: '#2ca02c' },
   ];
   const links = [
     { source: 'grossIncome', target: 'applicableExpense', value: applicableExpense / periodFactor },
@@ -72,10 +68,13 @@ const ContractorDiagram = props => {
 };
 
 ContractorDiagram.propTypes = {
-  grossIncome: PropTypes.number.isRequired,
-  expense: PropTypes.number.isRequired,
-  flatExpenseRate: PropTypes.number.isRequired,
-  sicknessInsuranceEnabled: PropTypes.bool.isRequired,
+  period: PropTypes.string.isRequired,
+  contractor: PropTypes.shape({
+    grossIncome: PropTypes.number.isRequired,
+    expense: PropTypes.number.isRequired,
+    sicknessInsuranceEnabled: PropTypes.bool.isRequired,
+    unpaidDays: PropTypes.number.isRequired,
+  }),
 };
 
 
