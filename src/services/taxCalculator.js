@@ -33,7 +33,7 @@ const TaxCalculator = {
     return Math.max(amount * ((PeriodFactor[Period.DAY] - unpaidDays) / PeriodFactor[Period.DAY]), 0);
   },
 
-  contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate: (grossIncome, expense, flatExpenseRate) => {
+  contractorTaxExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate: (grossIncome, expense, flatExpenseRate) => {
     return Math.max(expense, Math.min(grossIncome, contractorMaximalIncomeForFlatExpense) * flatExpenseRate);
   },
 

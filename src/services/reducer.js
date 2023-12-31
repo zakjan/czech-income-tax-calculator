@@ -10,7 +10,8 @@ const initialState = Immutable.Map({
   period: savedState.period || Period.YEAR,
   employee: {
     grossSalary: savedState.employee?.grossSalary || 480000,
-    benefit: savedState.employee?.benefit || 0,
+    benefitTaxExpense: savedState.employee?.benefitTaxExpense || 0,
+    benefitNonTaxExpense: savedState.employee?.benefitNonTaxExpense || 0,
     unpaidDays: savedState.employee?.unpaidDays || 0,
   },
   contractor: {
@@ -33,8 +34,13 @@ const reducer = handleActions({
     window.localStorage.setItem('state', JSON.stringify(newState));
     return newState;
   },
-  [actionTypes.SET_EMPLOYEE_BENEFIT]: (state, action) => {
-    const newState = state.mergeDeep({ employee: { benefit: action.payload }});
+  [actionTypes.SET_EMPLOYEE_BENEFIT_TAX_DEDUCTIBLE_EXPENSE]: (state, action) => {
+    const newState = state.mergeDeep({ employee: { benefitTaxExpense: action.payload }});
+    window.localStorage.setItem('state', JSON.stringify(newState));
+    return newState;
+  },
+  [actionTypes.SET_EMPLOYEE_BENEFIT_NON_TAX_DEDUCTIBLE_EXPENSE]: (state, action) => {
+    const newState = state.mergeDeep({ employee: { benefitNonTaxExpense: action.payload }});
     window.localStorage.setItem('state', JSON.stringify(newState));
     return newState;
   },

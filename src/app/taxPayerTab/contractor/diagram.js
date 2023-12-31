@@ -12,10 +12,10 @@ const ContractorDiagram = props => {
 
   const activeGrossIncome = TaxCalculator.activeAmountWithoutUnpaidDays(grossIncome, unpaidDays);
   
-  const applicableExpense = TaxCalculator.contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(activeGrossIncome, expense, flatExpenseRate);
-  const virtualExpense = applicableExpense - expense;
+  const taxExpense = TaxCalculator.contractorTaxExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(activeGrossIncome, expense, flatExpenseRate);
+  const virtualExpense = taxExpense - expense;
 
-  const incomeTaxableBase = TaxCalculator.contractorIncomeTaxableBaseFromGrossIncomeAndExpense(activeGrossIncome, applicableExpense);
+  const incomeTaxableBase = TaxCalculator.contractorIncomeTaxableBaseFromGrossIncomeAndExpense(activeGrossIncome, taxExpense);
   const incomeTax = TaxCalculator.personalIncomeTaxFromIncomeTaxableBase(incomeTaxableBase);
   const socialInsurance = TaxCalculator.contractorSocialInsuranceFromIncomeTaxableBase(incomeTaxableBase);
   const sicknessInsurance = TaxCalculator.contractorSicknessInsuranceFromIncomeTaxableBaseIfEnabled(incomeTaxableBase, sicknessInsuranceEnabled);
@@ -26,7 +26,7 @@ const ContractorDiagram = props => {
   const nodes = [
     { id: 'grossIncome', name: 'Příjmy', color: '#1f77b4' },
 
-    { id: 'applicableExpense', name: 'Náklady', color: '#aec7e8' },
+    { id: 'taxExpense', name: 'Daňové náklady', color: '#aec7e8' },
     { id: 'incomeTaxableBase', name: 'Zdanitelný základ', color: '#aec7e8' },
 
     { id: 'expenseDummy' },
@@ -42,11 +42,11 @@ const ContractorDiagram = props => {
     { id: 'netIncome', name: 'Čisté příjmy', color: '#2ca02c' },
   ];
   const links = [
-    { source: 'grossIncome', target: 'applicableExpense', value: applicableExpense / periodFactor },
+    { source: 'grossIncome', target: 'taxExpense', value: taxExpense / periodFactor },
     { source: 'grossIncome', target: 'incomeTaxableBase', value: incomeTaxableBase / periodFactor },
 
-    { source: 'applicableExpense', target: 'expenseDummy', value: expense / periodFactor },
-    { source: 'applicableExpense', target: 'virtualExpenseDummy', value: virtualExpense / periodFactor },
+    { source: 'taxExpense', target: 'expenseDummy', value: expense / periodFactor },
+    { source: 'taxExpense', target: 'virtualExpenseDummy', value: virtualExpense / periodFactor },
     { source: 'incomeTaxableBase', target: 'incomeTax', value: incomeTax / periodFactor },
     { source: 'incomeTaxableBase', target: 'socialInsurance', value: socialInsurance / periodFactor },
     { source: 'incomeTaxableBase', target: 'sicknessInsurance', value: sicknessInsurance / periodFactor },

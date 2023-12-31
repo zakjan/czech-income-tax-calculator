@@ -8,7 +8,7 @@ import formatCurrency from 'services/formatCurrency.js';
 
 
 const EmployeeForm = props => {
-  const { period, employee: { grossSalary, benefit, unpaidDays }} = props;
+  const { period, employee: { grossSalary, benefitTaxExpense, benefitNonTaxExpense, unpaidDays }} = props;
 
   const activeGrossSalary = TaxCalculator.activeAmountWithoutUnpaidDays(grossSalary, unpaidDays);
 
@@ -16,14 +16,19 @@ const EmployeeForm = props => {
     <table>
       <tbody>
         <tr>
-          <td width="150">Hrubá mzda:</td>
+          <td width="175">Hrubá mzda:</td>
           <td width="150"><MoneyInput period={period} value={grossSalary} onChange={props.setEmployeeGrossSalary} /></td>
           <td align="right">{formatCurrency(activeGrossSalary)} / rok</td>
         </tr>
         <tr>
-          <td>Benefity:</td>
-          <td><MoneyInput period={period} value={benefit} onChange={props.setEmployeeBenefit} /></td>
-          <td align="right">{formatCurrency(benefit)} / rok</td>
+          <td>Benefity - daňové náklady:</td>
+          <td><MoneyInput period={period} value={benefitTaxExpense} onChange={props.setEmployeeBenefitTaxExpense} /></td>
+          <td align="right">{formatCurrency(benefitTaxExpense)} / rok</td>
+        </tr>
+        <tr>
+          <td>Benefity - nedaňové náklady:</td>
+          <td><MoneyInput period={period} value={benefitNonTaxExpense} onChange={props.setEmployeeBenefitNonTaxExpense} /></td>
+          <td align="right">{formatCurrency(benefitNonTaxExpense)} / rok</td>
         </tr>
         <tr>
           <td>Neplacené volno:</td>
@@ -38,10 +43,11 @@ EmployeeForm.propTypes = {
   period: PropTypes.string.isRequired,
   employee: PropTypes.shape({
     grossSalary: PropTypes.number.isRequired,
-    benefit: PropTypes.number.isRequired,
+    benefitTaxExpense: PropTypes.number.isRequired,
+    benefitNonTaxExpense: PropTypes.number.isRequired,
   }),
   setEmployeeGrossSalary: PropTypes.func.isRequired,
-  setEmployeeBenefit: PropTypes.func.isRequired,
+  setEmployeeBenefitTaxExpense: PropTypes.func.isRequired,
 };
 
 

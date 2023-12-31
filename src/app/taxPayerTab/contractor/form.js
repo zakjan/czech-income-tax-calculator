@@ -17,7 +17,7 @@ const ContractorForm = props => {
     <table>
       <tbody>
         <tr>
-          <td width="150">Příjmy:</td>
+          <td width="175">Příjmy:</td>
           <td width="150"><MoneyInput period={period} value={grossIncome} onChange={props.setContractorGrossIncome} /></td>
           <td align="right">{formatCurrency(activeGrossIncome)} / rok</td>
         </tr>

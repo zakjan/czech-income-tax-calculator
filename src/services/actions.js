@@ -6,7 +6,8 @@ import actionTypes from './actionTypes.js';
 const actions = {
   setPeriod: createAction(actionTypes.SET_PERIOD),
   setEmployeeGrossSalary: createAction(actionTypes.SET_EMPLOYEE_GROSS_SALARY),
-  setEmployeeBenefit: createAction(actionTypes.SET_EMPLOYEE_BENEFIT),
+  setEmployeeBenefitTaxExpense: createAction(actionTypes.SET_EMPLOYEE_BENEFIT_TAX_DEDUCTIBLE_EXPENSE),
+  setEmployeeBenefitNonTaxExpense: createAction(actionTypes.SET_EMPLOYEE_BENEFIT_NON_TAX_DEDUCTIBLE_EXPENSE),
   setEmployeeUnpaidDays: createAction(actionTypes.SET_EMPLOYEE_UNPAID_DAYS),
   setContractorGrossIncome: createAction(actionTypes.SET_CONTRACTOR_GROSS_INCOME),
   setContractorExpense: createAction(actionTypes.SET_CONTRACTOR_EXPENSE),
