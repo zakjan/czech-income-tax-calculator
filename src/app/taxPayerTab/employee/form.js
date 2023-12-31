@@ -21,7 +21,7 @@ const EmployeeForm = props => {
           <td align="right">{formatCurrency(activeGrossSalary)} / rok</td>
         </tr>
         <tr>
-          <td>Osvobozené příspěvky:</td>
+          <td>Benefity:</td>
           <td><MoneyInput period={period} value={benefit} onChange={props.setEmployeeBenefit} /></td>
           <td align="right">{formatCurrency(benefit)} / rok</td>
         </tr>

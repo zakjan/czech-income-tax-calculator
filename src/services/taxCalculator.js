@@ -1,10 +1,12 @@
 import Period from '../models/period.js';
 import PeriodFactor from '../models/periodFactor.js';
 
-const incomeTaxRate = 0.15;
-const incomeTaxRateZone2 = 0.23;
-const incomeTaxDeductionForPayer = 30840;
-const incomeThresholdZone2 = 131901 * 12; // https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/prehledne-ktere-zmeny-prinese-rok-2024-nejen-pro-o-54178
+const personalIncomeTaxRate = 0.15;
+const personalIncomeTaxRateZone2 = 0.23;
+const personalIncomeTaxDeductionForPayer = 30840;
+const personalIncomeTaxThresholdZone2 = 131901 * 12; // https://www.mfcr.cz/cs/ministerstvo/media/tiskove-zpravy/2023/prehledne-ktere-zmeny-prinese-rok-2024-nejen-pro-o-54178
+
+const corporateIncomeTaxRate = 0.21;
 
 const contractorMaximalIncomeForFlatExpense = 2000000;
 const contractorSocialInsuranceRate = 0.292; // excluding sickness insurance
@@ -39,13 +41,17 @@ const TaxCalculator = {
     return Math.max(grossIncome - expense, 0);
   },
 
-  incomeTaxFromIncomeTaxableBase: incomeTaxableBase => {
+  personalIncomeTaxFromIncomeTaxableBase: incomeTaxableBase => {
     const roundedIncomeTaxableBase = Math.floor(incomeTaxableBase / 100) * 100;
-    const deductions = incomeTaxDeductionForPayer;
-    const incomeTaxZone1 = Math.min(roundedIncomeTaxableBase, incomeThresholdZone2) * incomeTaxRate;
-    const incomeTaxZone2 = Math.max(roundedIncomeTaxableBase - incomeThresholdZone2, 0) * incomeTaxRateZone2;
+    const deductions = personalIncomeTaxDeductionForPayer;
+    const incomeTaxZone1 = Math.min(roundedIncomeTaxableBase, personalIncomeTaxThresholdZone2) * personalIncomeTaxRate;
+    const incomeTaxZone2 = Math.max(roundedIncomeTaxableBase - personalIncomeTaxThresholdZone2, 0) * personalIncomeTaxRateZone2;
     const incomeTax = incomeTaxZone1 + incomeTaxZone2;
     return Math.max(incomeTax - deductions, 0);
+  },
+
+  corporateIncomeTaxFromIncomeTaxableBase: incomeTaxableBase => {
+    return incomeTaxableBase * corporateIncomeTaxRate;
   },
 
   contractorSocialInsuranceFromIncomeTaxableBase: incomeTaxableBase => {

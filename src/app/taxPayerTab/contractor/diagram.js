@@ -16,7 +16,7 @@ const ContractorDiagram = props => {
   const virtualExpense = applicableExpense - expense;
 
   const incomeTaxableBase = TaxCalculator.contractorIncomeTaxableBaseFromGrossIncomeAndExpense(activeGrossIncome, applicableExpense);
-  const incomeTax = TaxCalculator.incomeTaxFromIncomeTaxableBase(incomeTaxableBase);
+  const incomeTax = TaxCalculator.personalIncomeTaxFromIncomeTaxableBase(incomeTaxableBase);
   const socialInsurance = TaxCalculator.contractorSocialInsuranceFromIncomeTaxableBase(incomeTaxableBase);
   const sicknessInsurance = TaxCalculator.contractorSicknessInsuranceFromIncomeTaxableBaseIfEnabled(incomeTaxableBase, sicknessInsuranceEnabled);
   const healthInsurance = TaxCalculator.contractorHealthInsuranceFromIncomeTaxableBase(incomeTaxableBase);
@@ -26,7 +26,7 @@ const ContractorDiagram = props => {
   const nodes = [
     { id: 'grossIncome', name: 'Příjmy', color: '#1f77b4' },
 
-    { id: 'applicableExpense', name: 'Uplatnitelné výdaje', color: '#aec7e8' },
+    { id: 'applicableExpense', name: 'Náklady', color: '#aec7e8' },
     { id: 'incomeTaxableBase', name: 'Zdanitelný základ', color: '#aec7e8' },
 
     { id: 'expenseDummy' },
