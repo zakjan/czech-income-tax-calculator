@@ -8,15 +8,18 @@ import PeriodFactor from 'models/periodFactor.js';
 
 const ContractorDiagram = props => {
   const periodFactor = PeriodFactor[props.period];
-  const grossIncome = TaxCalculator.contractorAmountWithoutUnpaidDays(props.grossIncome, props.unpaidDays);
-  const expense = TaxCalculator.contractorAmountWithoutUnpaidDays(props.expense, props.unpaidDays);
+  const grossIncome = props.grossIncome;
+  const expense = props.expense;
   const flatExpenseRate = props.flatExpenseRate;
   const sicknessInsuranceEnabled = props.sicknessInsuranceEnabled;
+  const unpaidDays = props.unpaidDays;
+
+  const activeGrossIncome = TaxCalculator.contractorAmountWithoutUnpaidDays(grossIncome, unpaidDays);
   
-  const applicableExpense = TaxCalculator.contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(grossIncome, expense, flatExpenseRate);
+  const applicableExpense = TaxCalculator.contractorApplicableExpenseFromGrossIncomeAndExpenseAndFlatExpenseRate(activeGrossIncome, expense, flatExpenseRate);
   const virtualExpense = applicableExpense - expense;
 
-  const incomeTaxableBase = TaxCalculator.contractorIncomeTaxableBaseFromGrossIncomeAndExpense(grossIncome, applicableExpense);
+  const incomeTaxableBase = TaxCalculator.contractorIncomeTaxableBaseFromGrossIncomeAndExpense(activeGrossIncome, applicableExpense);
   const incomeTax = TaxCalculator.incomeTaxFromIncomeTaxableBase(incomeTaxableBase);
   const socialInsurance = TaxCalculator.contractorSocialInsuranceFromIncomeTaxableBase(incomeTaxableBase);
   const sicknessInsurance = TaxCalculator.contractorSicknessInsuranceFromIncomeTaxableBaseIfEnabled(incomeTaxableBase, sicknessInsuranceEnabled);

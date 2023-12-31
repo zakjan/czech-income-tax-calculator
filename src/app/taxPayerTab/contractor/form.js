@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 import MoneyInput from 'app/moneyInput/moneyInput.js';
 import NumberSelect from 'app/numberSelect/numberSelect.js';
 import NumberInput from 'app/numberInput/numberInput.js';
+import TaxCalculator from 'services/taxCalculator.js';
 import formatCurrency from 'services/formatCurrency.js';
 
 
 const ContractorForm = props => {
+  const activeGrossIncome = TaxCalculator.contractorAmountWithoutUnpaidDays(props.grossIncome, props.unpaidDays);
+
   return (
     <table>
       <tbody>
         <tr>
           <td width="110">Příjmy:</td>
           <td width="150"><MoneyInput period={props.period} value={props.grossIncome} onChange={props.setGrossIncome} /></td>
-          <td align="right">{formatCurrency(props.grossIncome)} / rok</td>
+          <td align="right">{formatCurrency(activeGrossIncome)} / rok</td>
         </tr>
         <tr>
           <td>Výdaje:</td>
