@@ -55,17 +55,17 @@ const TaxCalculator = {
   },
 
   contractorSocialInsuranceFromIncomeTaxableBase: incomeTaxableBase => {
-    const socialInsuranceTaxableBase = Math.max(Math.min(incomeTaxableBase / 2, contractorMaximalSocialInsuranceTaxableIncome), contractorMinimalSocialInsuranceTaxableIncome);
+    const socialInsuranceTaxableBase = Math.max(Math.min(incomeTaxableBase * 0.55, contractorMaximalSocialInsuranceTaxableIncome), contractorMinimalSocialInsuranceTaxableIncome);
     return socialInsuranceTaxableBase * contractorSocialInsuranceRate;
   },
 
   contractorSicknessInsuranceFromIncomeTaxableBaseIfEnabled: (incomeTaxableBase, sicknessInsuranceEnabled) => {
-    const sicknessInsuranceTaxableBase = Math.max(incomeTaxableBase / 2, contractorMinimalSicknessInsuranceTaxableIncome);
+    const sicknessInsuranceTaxableBase = Math.max(incomeTaxableBase * 0.55, contractorMinimalSicknessInsuranceTaxableIncome);
     return sicknessInsuranceEnabled ? sicknessInsuranceTaxableBase * contractorSicknessInsuranceRate : 0;
   },
 
   contractorHealthInsuranceFromIncomeTaxableBase: incomeTaxableBase => {
-    const healthInsuranceTaxableBase = Math.max(incomeTaxableBase / 2, contractorMinimalHealthInsuranceTaxableIncome);
+    const healthInsuranceTaxableBase = Math.max(incomeTaxableBase * 0.5, contractorMinimalHealthInsuranceTaxableIncome);
     return healthInsuranceTaxableBase * contractorHealthInsuranceRate;
   },
 
