@@ -22,7 +22,7 @@ const EmployeeDiagram = props => {
   const netSalary = activeGrossSalary - personalIncomeTax - employeeSocialInsurance - employeeHealthInsurance;
 
   const nodes = [
-    { id: 'expense', name: 'Náklady', color: '#1f77b4' },
+    { id: 'expense', name: 'Náklady zaměstnavatele', color: '#1f77b4' },
 
     { id: 'corporateIncomeTax', name: 'Daň z příjmů právnických osob', color: '#ffbb78' },
     { id: 'employerSocialInsurance', name: 'Sociální pojištění zaměstnavatele', color: '#ffbb78' },
